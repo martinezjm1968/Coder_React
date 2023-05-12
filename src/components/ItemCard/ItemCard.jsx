@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { CotizacionDolar } from '../Context/CotizacionDolar';
-import "../../components/ItemCard/ItemCard.css";
+import "./ItemCard.css";
 
 let count = 0;
 let precioPesos = 0;
@@ -16,7 +16,7 @@ export const ItemCard = ({ item }) => {
 
     if (item) {
         return (
-            <div className="col-md-3">
+            <div className="col-md-4">
                 <div className="card text-center bg-light animate__animated animate__fadeInUp">
                     <div className="overflow">
                         <img src={item.imageSource} alt="a wallpaper" className="card-img-top" />

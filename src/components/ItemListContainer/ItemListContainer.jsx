@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ItemList } from '../ItemList/ItemList';
 import { pedirDatos } from '../helpers/PedirDatos.js';
 import { useParams } from 'react-router-dom';
+//import "../ItemCard/ItemCard.css";
 
 export const ItemListContainer = () => {
     const [productos, setProductos] = useState([])
@@ -36,6 +37,7 @@ export const ItemListContainer = () => {
         </div>
     )
 }
+
 
 
 
