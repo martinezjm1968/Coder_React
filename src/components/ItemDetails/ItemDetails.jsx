@@ -35,9 +35,9 @@ export const ItemDetails = ({ item }) => {
                     </p>
 
                     <p style={{ color: 'black' }}> Stock actual: {item.stock}  </p>
-                    
+
                     <p style={{ fontSize: '16px', color: 'black' }}> Precio Unitario: u${item.precio}  </p>
-                    
+
                     {dolar &&
                         <>
                             <p style={{ fontSize: '16px', color: 'black' }}>  Precio Unitario: ${(precioPesos).toLocaleString()}  </p>
@@ -55,11 +55,9 @@ export const ItemDetails = ({ item }) => {
                                 agregar={handleAgregar}
                             />
                     }
-
-
                 </div>
+                
             </div>
-
         </div>
     )
 }
