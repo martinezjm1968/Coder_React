@@ -19,9 +19,9 @@ export const Cart = () => {
                     <div class="row">
                         <h2>Tu compra</h2>
                         <hr />
+                        <div className="card-body text-black">
                         {
                             cart.map((item) => (
-                                <div className="card-body text-black">
                                     <div key={item.id}>
                                         <h4>{item.title}</h4>
                                         <img style={{ width: '80px', height: '80px' }} src={item.imageSource} />
@@ -30,9 +30,10 @@ export const Cart = () => {
                                         <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>
                                         <hr />
                                     </div>
-                                </div>
+                                
                             ))
                         }
+                        </div>
                         
                     </div>
                 </div>

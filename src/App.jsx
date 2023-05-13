@@ -26,7 +26,6 @@ function App() {
             <Route path='/detail/:itemId' element={<ItemDetailContainer />} />
             <Route path='/carrito' element={<CartWidget />} />
             <Route path='/contacto' element={<Contacto />} />
-
             <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<Navigate to={"/"} />} />
             

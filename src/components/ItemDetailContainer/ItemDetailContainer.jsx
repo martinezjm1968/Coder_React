@@ -22,14 +22,17 @@ export const ItemDetailContainer = () => {
             .finally(() => setLoading(false))
     }, [])
 
+    console.log("Utilizando ItemDetailContainer");
     return (
-        <div className="container d-flex justify-content-center align-items-center h-100">
-            <div className="row">
-                {
-                    loading
-                        ? <h2>Cargando...</h2>
-                        : <ItemDetails item={item} />
-                }
+        <div className="container my-5">
+            <div className="container d-flex justify-content-center align-items-center h-100">
+                <div className="row">
+                    {
+                        loading
+                            ? <h2>Cargando...</h2>
+                            : <ItemDetails item={item} />
+                    }
+                </div>
             </div>
         </div>
     )

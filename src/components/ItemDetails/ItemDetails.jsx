@@ -24,7 +24,6 @@ export const ItemDetails = ({ item }) => {
 
     return (
         <div className="col-md-5">
-
             <div className="card text-center bg-light animate__animated animate__fadeInUp">
                 <div className="overflow">
                     <img src={item.imageSource} alt="a wallpaper" className="card-img-top" />

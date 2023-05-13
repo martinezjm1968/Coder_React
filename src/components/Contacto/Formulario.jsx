@@ -23,9 +23,9 @@ export function Formulario() {
                 <div className="container d-flex justify-content-center align-items-center h-100">
                     <div className="row">
                         <div>
-                            <label clasName='etiquetas' htmlFor="name">Nombre y Apellido: </label>
+                            <label className='etiquetas' htmlFor="name">Nombre y Apellido: </label>
                             <div>
-                                <input clasName='ingreso'
+                                <input className='ingreso'
                                     type="text"
                                     id="name"
                                     value={name}
@@ -34,9 +34,9 @@ export function Formulario() {
                             </div>
                         </div>
                         <div>
-                            <label clasName='etiquetas' htmlFor="email">Email: </label>
+                            <label className='etiquetas' htmlFor="email">Email: </label>
                             <div>
-                                <input clasName='ingreso'
+                                <input className='ingreso'
                                     type="email"
                                     id="email"
                                     value={email}
@@ -45,9 +45,9 @@ export function Formulario() {
                             </div>
                         </div>
                         <div>
-                            <label clasName='etiquetas' htmlFor="message">Mensaje: </label>
+                            <label className='etiquetas' htmlFor="message">Mensaje: </label>
                             <div>
-                                <textarea cols="40" rows="3" clasName='ingreso'
+                                <textarea cols="40" rows="3" className='ingreso'
                                     id="message"
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
@@ -58,9 +58,9 @@ export function Formulario() {
 
                     <div className="row">
                         <div>
-                            <label clasName='etiquetas' htmlFor="tel">Tel: </label>
+                            <label className='etiquetas' htmlFor="tel">Tel: </label>
                             <div>
-                                <input clasName='ingreso'
+                                <input className='ingreso'
                                     type="text"
                                     id="tel"
                                     value={tel}
@@ -69,9 +69,9 @@ export function Formulario() {
                             </div>
                         </div>
                         <div>
-                            <label clasName='etiquetas' htmlFor="dir">Dirección: </label>
+                            <label className='etiquetas' htmlFor="dir">Dirección: </label>
                             <div>
-                                <input clasName='ingreso'
+                                <input className='ingreso'
                                     type="dir"
                                     id="email"
                                     value={dir}
@@ -80,9 +80,9 @@ export function Formulario() {
                             </div>
                         </div>
                         <div>
-                            <label clasName='etiquetas' htmlFor="cuit">CUIT: </label>
+                            <label className='etiquetas' htmlFor="cuit">CUIT: </label>
                             <div>
-                                <input clasName='ingreso'
+                                <input className='ingreso'
                                     id="cuit"
                                     value={cuit}
                                     onChange={(e) => setCuit(e.target.value)}
@@ -93,7 +93,7 @@ export function Formulario() {
 
                 </div>
                 <p></p>
-                <button clasName='boton' type="submit">Enviar</button>
+                <button className='boton' type="submit">Enviar</button>
             </div>
         </form>
     );
