@@ -32,6 +32,14 @@
     align-items: center;
 }
 
+.costo-envio {
+    background-color: #adacab;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+
 @media (max-width: 768px) {
     .grid-container {
         grid-template-columns: 1fr;
