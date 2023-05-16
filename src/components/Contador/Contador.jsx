@@ -1,6 +1,6 @@
 
 
-export const Contador = ({cantidad, setCantidad, stock, agregar}) => {
+export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
 
 
     const handleRestar = () => {
@@ -11,22 +11,37 @@ export const Contador = ({cantidad, setCantidad, stock, agregar}) => {
         cantidad < stock && setCantidad(cantidad + 1)
     }
 
-    
-
     return (
         <div>
-            <button onClick={handleRestar} className="btn btn-outline-primary">-</button>
+            <button
+                onClick={handleRestar}
+                className={`btn mx-1 ${cantidad === 1 ? "btn-outline-danger" : "btn-outline-primary"}`}
+
+                disabled={cantidad === 1}
+            > - </button>
+
             <span style={{ color: 'black' }} className="mx-2">{cantidad}</span>
-            <button onClick={handleSumar} className="btn btn-primary">+</button>
-            <br/>
-            <br/>
-            
-            <button onClick={agregar} type="button" className="btn btn-danger"> Agregar al Carrito </button>
+
+            <button
+                onClick={handleSumar}
+                className={`btn mx-1 ${cantidad === stock ? "btn-outline-danger" : "btn-outline-primary"}`}
+                disabled={cantidad === stock}
+            > + </button>
+
             <br />
-            
+            <br />
+
+            <button
+                onClick={agregar}
+                type="button"
+                className="btn btn-danger">
+                Agregar al Carrito
+            </button>
+            <br />
+
         </div>
     )
 }
-// <button onClick={agregar} type="button" className="btn btn-info btn-lg btn3d"><span className="glyphicon glyphicon-question-sign"></span> Agregar al Carrito </button>
+
 
 
