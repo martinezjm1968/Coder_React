@@ -1,0 +1,71 @@
+.pie_de_pagina {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    
+
+}
+
+.pie_pagina {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+
+}
+
+/* Contenedor de contacto */
+.contacto {
+    width: auto;
+    height: auto;
+    margin: 5px 5px 5px 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Titulo de Contacto */
+.contacto_ref {
+    text-decoration: none;
+    color: #ec0b0b;
+    font-size: 20px;
+}
+
+.message {
+    height: 20px;
+    width: 20px;
+}
+
+
+.maps_google {
+    width: auto;
+    height: auto;
+}
+
+/* Posiciono los íconos de redes sociales para que sean siempre visibles */
+.redes_sociales {
+    position: fixed;
+    bottom: 50px;
+    right: 50px; 
+}
+
+.redes_sociales_icon {
+    height: 40px;
+    width: 40px;
+    transition: 1s;
+}
+
+.redes_sociales_icon:hover {
+    height: 60px;
+    width: 60px;
+}
+
