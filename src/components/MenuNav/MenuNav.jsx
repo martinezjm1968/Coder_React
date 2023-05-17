@@ -31,7 +31,7 @@ export function MenuNav() {
                         navbarScroll
                     >
 
-                        <NavDropdown title="Ventiladores" id="basic-nav-dropdown">
+                        <NavDropdown title="Tienda" id="basic-nav-dropdown">
                             <NavDropdown.Item ><Link to='/Tienda' style={{ color: 'black', textDecoration: 'none' }}>Tienda</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link to='/Tienda/Pared' style={{ color: 'black', textDecoration: 'none' }}>Ventiladores Pared</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link to='/Tienda/Pie' style={{ color: 'black', textDecoration: 'none' }}>Ventiladores Pie</Link></NavDropdown.Item>
