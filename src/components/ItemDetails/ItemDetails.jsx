@@ -19,7 +19,7 @@ export const ItemDetails = ({ item }) => {
         agregarAlCarrito(newItem)
     }
 
-    precioPesos = dolar.oficial.value_sell * item.precio;
+    precioPesos = dolar?.oficial.value_sell * item.precio;
     console.log("Item Imagen: " +item.imagen);
 
     return (

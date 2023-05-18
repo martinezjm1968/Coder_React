@@ -1,7 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { CotizacionDolar } from '../Context/CotizacionDolar';
 import "./ItemCard.css";
 
@@ -12,7 +11,7 @@ export const ItemCard = ({ item }) => {
     
     const { dolar } = useContext(CotizacionDolar)
 
-    precioPesos = dolar.oficial.value_sell * item.precio;
+    precioPesos = dolar?.oficial.value_sell * item.precio;
 
     if (item) {
         return (
