@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 
 
 export function MenuNav() {
-    const { dolar, setDolar } = useContext(CotizacionDolar)
+    const { dolar } = useContext(CotizacionDolar)
 
     return (
 

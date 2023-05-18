@@ -1,8 +1,4 @@
-
-
 export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
-
-
     const handleRestar = () => {
         cantidad > 1 && setCantidad(cantidad - 1)
     }

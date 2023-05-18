@@ -26,8 +26,8 @@ export const Cart = () => {
                                 {
                                     cart.map((item) => (
                                         <div key={item.id}>
-                                            <h4>{item.title}</h4>
-                                            <img style={{ width: '80px', height: '80px' }} src={item.imageSource} />
+                                            <h4>{item.titulo}</h4>
+                                            <img style={{ width: '80px', height: '80px' }} src={item.imagen} alt={item.titulo}/>
                                             <p>Cantidad: {item.cantidad} unidades</p>
                                             <p>Subotal: ${(item.cantidad * dolar.oficial.value_sell * item.precio).toLocaleString()}</p>
                                             <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>

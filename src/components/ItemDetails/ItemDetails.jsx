@@ -8,7 +8,7 @@ let precioPesos = 0;
 
 export const ItemDetails = ({ item }) => {
     const { agregarAlCarrito, isInCart } = useContext(CartContext)
-    const { dolar, setDolar } = useContext(CotizacionDolar)
+    const { dolar } = useContext(CotizacionDolar)
     const [cantidad, setCantidad] = useState(1)
 
     const handleAgregar = () => {
@@ -20,16 +20,16 @@ export const ItemDetails = ({ item }) => {
     }
 
     precioPesos = dolar.oficial.value_sell * item.precio;
-
+    console.log("Item Imagen: " +item.imagen);
 
     return (
         <div className="col-md-5">
             <div className="card text-center bg-light animate__animated animate__fadeInUp">
                 <div className="overflow">
-                    <img src={item.imageSource} alt="a wallpaper" className="card-img-top" />
+                    <img src={item.imagen} className="card-img-top" alt={item.titulo} />
                 </div>
                 <div className="card-body text-light">
-                    <h4 style={{ color: 'black' }} className="card-title">{item.title}</h4>
+                    <h4 style={{ color: 'black' }} className="card-title">{item.titulo}</h4>
                     <p className="card-text text-dark">
                         {item.cuerpo}
                     </p>

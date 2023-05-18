@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { pedirDatos } from "../helpers/PedirDatos.js"
 import { useParams } from "react-router-dom"
 import { ItemDetails } from "../ItemDetails/ItemDetails"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from '../Firebase/Config'
 
 
 
@@ -10,19 +11,27 @@ export const ItemDetailContainer = () => {
     const [loading, setLoading] = useState(true)
 
     const { itemId } = useParams()
-    console.log("ItemId: " + itemId)
-    console.log("Item: " + item)
 
     useEffect(() => {
         setLoading(true)
 
-        pedirDatos()
-            .then((data) => setItem(data.find((el) => el.id === Number(itemId))))
-            .catch(err => console.log(err))
+        // 1.- armo la referencia (sync)
+        const docRef = doc(db, "items", itemId)
+        // 2.- llamo a la ref (async)
+        getDoc(docRef)
+            .then((doc) => {
+                const item = {
+                    ...doc.data(),
+                    id: doc.id
+                }
+
+                setItem(item)
+            })
+            .catch(e => console.log(e))
             .finally(() => setLoading(false))
     }, [])
 
-    console.log("Utilizando ItemDetailContainer");
+    
     return (
         <div className="container my-5">
             <div className="container d-flex justify-content-center align-items-center h-100">

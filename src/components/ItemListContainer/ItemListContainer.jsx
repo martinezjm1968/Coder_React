@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { ItemList } from '../ItemList/ItemList';
-import { pedirDatos } from '../helpers/PedirDatos.js';
 import { useParams } from 'react-router-dom';
+import { collection, getDocs, query, where } from 'firebase/firestore'
+import { db } from '../Firebase/Config'
 //import "../ItemCard/ItemCard.css";
 
 export const ItemListContainer = () => {
@@ -15,15 +16,23 @@ export const ItemListContainer = () => {
     useEffect(() => {
         setLoading(true)
 
-        pedirDatos()
-            .then((data) => {
-                if (!categoriaId) {
-                    setProductos(data)
-                } else {
-                    setProductos( data.filter((el) => el.categoria === categoriaId) )
-                }
+        // 1.- Armar una referencia (sync)
+        const productosRef = collection(db, "items")
+        const q = categoriaId
+            ? query(productosRef, where("categoria", "==", categoriaId))
+            : productosRef
+        // 2.- Consumir esa referencia (async)
+        getDocs(q)
+            .then((res) => {
+                const docs = res.docs.map((doc) => {
+                    return {
+                        ...doc.data(),
+                        id: doc.id
+                    }
+                })
+                setProductos(docs)
             })
-            .catch((err) => console.log(err))
+            .catch(e => console.log(e))
             .finally(() => setLoading(false))
     }, [categoriaId])
 
@@ -32,7 +41,7 @@ export const ItemListContainer = () => {
             {
                 loading
                     ? <h2>Cargando...</h2>
-                    : <ItemList items={productos}/>
+                    : <ItemList items={productos} />
             }
         </div>
     )

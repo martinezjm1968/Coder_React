@@ -1,4 +1,4 @@
-import imagen1 from "../../assets/ventilador_31_pie.png";
+import imagen1 from '../../assets/ventilador_31_pie.png';
 import imagen2 from '../../assets/ventilador_27_pared.png';
 import imagen3 from '../../assets/Ventilador_20_pared.png';
 import imagen4 from '../../assets/Ventilador_20_pie.png';

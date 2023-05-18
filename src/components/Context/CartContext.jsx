@@ -5,7 +5,7 @@ import { CotizacionDolar } from '../Context/CotizacionDolar';
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-    const { dolar, setDolar } = useContext(CotizacionDolar)
+    const { dolar } = useContext(CotizacionDolar)
 
     const [cart, setCart] = useState([])
     console.log(cart)
@@ -15,11 +15,11 @@ export const CartProvider = ({ children }) => {
     }
 
     const removeItem = (id) => {
-        setCart(cart.filter((item) => parseInt(item.id) !== parseInt(id)))
+        setCart(cart.filter((item) => item.id !== id))
     }
 
     const isInCart = (id) => {
-        return (cart.some((item) => parseInt(item.id) === parseInt(id)))
+        return (cart.some((item) => item.id === id))
     }
 
     const emptyCart = () => {
