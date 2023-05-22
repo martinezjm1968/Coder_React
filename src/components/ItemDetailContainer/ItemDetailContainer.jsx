@@ -31,7 +31,7 @@ export const ItemDetailContainer = () => {
             .finally(() => setLoading(false))
     }, [])
 
-    
+
     return (
         <div className="container my-5">
             <div className="container d-flex justify-content-center align-items-center h-100">
