@@ -21,23 +21,27 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <MenuNav />
-            
+
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/tienda' element={<ItemListContainer />} />
                 <Route path='/tienda/:categoriaId' element={<ItemListContainer />} />
                 <Route path='/detail/:itemId' element={<ItemDetailContainer />} />
                 <Route path='/contacto' element={<Contacto />} />
-                <Route path='/login' element={<LoginScreen />} />
-                
+
+
                 {
                     user.logged
                         ? <>
                             <Route path='/cart' element={<Cart />} />
                             <Route path='/carrito' element={<CartWidget />} />
                         </>
-                        : null
-                        
+                        :
+                        <>
+                            <Route path='/login' element={<LoginScreen />} />
+                            <Route path='/register' element={<RegisterScreen />} />
+                        </>
+
                 }
                 <Route path='*' element={<Navigate to={"/"} />} />
             </Routes>

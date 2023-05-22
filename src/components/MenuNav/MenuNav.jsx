@@ -9,22 +9,27 @@ import { CotizacionDolar } from '../Context/CotizacionDolar';
 import { CartWidget } from '../CartWidget/CartWidget';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
-import { LoginScreen } from '../LoginScreen/LoginScreen';
+import { LoginScreen } from "../LoginScreen/LoginScreen";
+
 
 export function MenuNav() {
     const { dolar } = useContext(CotizacionDolar)
     const { user, logout } = useContext(AuthContext)
-    
+
     return (
         <header className="header">
             <nav>
-                <span style={{fontSize:'10px'}}>Bienvenido {user.email} &nbsp;</span>
+                <span style={{ fontSize: '10px' }}>Bienvenido {user.email} &nbsp;</span>
                 {user.logged ?
                     <>
-                        <button className='btn btn-danger' style={{fontSize:'10px'}} onClick={logout}>Logout</button>
+                        <button className='btn btn-danger' style={{ fontSize: '10px' }} onClick={logout}>Logout</button>
                     </>
-                    : null
-                    
+                    :
+                    <>
+
+                        <Link className="btn btn-success" style={{ fontSize: '10px' }} to="/login">Login</Link>
+                    </>
+
                 }
             </nav>
             <Navbar bg="light" expand="lg" >
@@ -48,7 +53,6 @@ export function MenuNav() {
                             </NavDropdown>
 
                             <Nav.Link as='span'><Link to='/Contacto' style={{ color: 'black', textDecoration: 'none' }}>Contacto</Link></Nav.Link>
-                            <Nav.Link as='span'><Link to='/LoginScreen' style={{ color: 'black', textDecoration: 'none' }}>Login</Link></Nav.Link>
                         </Nav>
 
 
@@ -57,6 +61,15 @@ export function MenuNav() {
 
                                 <div>
                                     <span style={{ fontSize: '10px' }}> Cotización Dólar: ${dolar?.oficial.value_sell}  </span>
+                                </div>
+
+                                <div>
+                                    {!user.logged ?
+                                        <>
+                                            <span style={{ fontSize: '10px' }}>Para acceder al carrito debe logearse primero!</span>
+                                        </>
+                                        : ""
+                                    }
                                 </div>
                                 <CartWidget />
                             </div>
@@ -72,4 +85,3 @@ export function MenuNav() {
         </header>
     );
 }
-
