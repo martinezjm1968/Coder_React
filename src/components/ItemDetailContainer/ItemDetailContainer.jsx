@@ -27,7 +27,7 @@ export const ItemDetailContainer = () => {
 
                 setItem(item)
             })
-            .catch(e => console.log(e))
+            .catch(e => alert(e))
             .finally(() => setLoading(false))
     }, [])
 

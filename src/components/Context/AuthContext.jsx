@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) => {
         logged: false
     })
 
-    console.log(user)
+    
 
     const login = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
@@ -41,7 +41,7 @@ export const AuthProvider = ({children}) => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            console.log(user)
+            
             if (user) {
                 setUser({
                     email: user.email,

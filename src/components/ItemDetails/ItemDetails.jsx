@@ -20,7 +20,7 @@ export const ItemDetails = ({ item }) => {
     }
 
     precioPesos = dolar?.oficial.value_sell * item.precio;
-    console.log("Item Imagen: " +item.imagen);
+    
 
     return (
         <div className="col-md-5">

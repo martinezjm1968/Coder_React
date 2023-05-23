@@ -11,7 +11,7 @@ export const ItemListContainer = () => {
     const [loading, setLoading] = useState(true)
 
     const { categoriaId } = useParams()
-    console.log(categoriaId)
+    
 
     useEffect(() => {
         setLoading(true)
@@ -32,7 +32,7 @@ export const ItemListContainer = () => {
                 })
                 setProductos(docs)
             })
-            .catch(e => console.log(e))
+            .catch(e => alert(e))
             .finally(() => setLoading(false))
     }, [categoriaId])
 

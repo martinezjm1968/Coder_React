@@ -12,7 +12,7 @@ export const CotizacionDolarProvider = ({ children }) => {
             .then((dolarOficial) => {
                 setDolar(dolarOficial)
             })
-            .catch(err => console.log("Error en API dolar: " + err))
+            .catch(err => alert("Error en API dolar: " + err))
     }, [])
 
 
