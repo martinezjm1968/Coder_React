@@ -12,7 +12,7 @@ import RegisterScreen from '../LoginScreen/RegisterScreen';
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { MenuNav } from "../MenuNav/MenuNav";
-
+import { Checkout } from "../Checkout/Checkout";
 
 
 const AppRouter = () => {
@@ -35,6 +35,7 @@ const AppRouter = () => {
                         ? <>
                             <Route path='/cart' element={<Cart />} />
                             <Route path='/carrito' element={<CartWidget />} />
+                            <Route path='/checkout' element={<Checkout />} />
                         </>
                         :
                         <>

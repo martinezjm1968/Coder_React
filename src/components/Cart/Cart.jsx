@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import { FaTrashAlt } from 'react-icons/fa';
 import { CotizacionDolar } from '../Context/CotizacionDolar';
+import { Link } from "react-router-dom";
 import './Cart.css';
 
 let precioPesos = 0;
@@ -26,8 +27,8 @@ export const Cart = () => {
                                 {
                                     cart.map((item) => (
                                         <div key={item.id}>
-                                            <h4>{item.titulo}</h4>
-                                            <img style={{ width: '80px', height: '80px' }} src={item.imagen} alt={item.titulo}/>
+                                            <h4>{item.title}</h4>
+                                            <img style={{ width: '80px', height: '80px' }} src={item.imageSource} alt={item.title}/>
                                             <p>Cantidad: {item.cantidad} unidades</p>
                                             <p>Subotal: ${(item.cantidad * dolar.oficial.value_sell * item.precio).toLocaleString()}</p>
                                             <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>
@@ -51,7 +52,7 @@ export const Cart = () => {
                         <hr />
 
 
-                        <button onClick={emptyCart} className="btn btn-success">Finalizar Compra</button>
+                        <Link to="/checkout" className="btn btn-success">Finalizar mi compra</Link>
                     </div>
                 </div>
             </div>

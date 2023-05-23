@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "Ventilador 31 pulgadas Pared",
+        "cuerpo": "Ventilador de 31 pulgadas de Pared - Motor WEG con doble ruleman y protector térmico - Caudal de aire 14m. Medidas caja 80x80x36cm",
+        "imageSource": "imagen2",
+        "stock": 900,
+        "precio": 245,
+        "categoria": "Pared"
+    },
+    {
+        "id": 2,
+        "title": "Ventilador 31 pulgadas Pie",
+        "cuerpo": "Ventilador de 31 pulgadas de Pie - Motor WEG con doble ruleman y protector térmico - Caudal de aire 14m. Medidas caja 80x80x36cm",
+        "imageSource": "imagen2",
+        "stock": 85,
+        "precio": 290,
+        "categoria": "Pie"
+    },
+    {
+        "id": 3,
+        "title": "Ventilador 27 pulgadas Pared",
+        "cuerpo": "Ventilador de 27 pulgadas de Pared - Motor WEG con doble ruleman y protector térmico - Caudal de aire 14m. Medidas caja 80x80x36cm",
+        "imageSource": "imagen2",
+        "stock": 300,
+        "precio": 210,
+        "categoria": "Pared"
+    },
+    {
+        "id": 4,
+        "title": "Ventilador 27 pulgadas Pie",
+        "cuerpo": "Ventilador de 31 pulgadas de Pie - Motor WEG con doble ruleman y protector térmico - Caudal de aire 14m. Medidas caja 80x80x36cm",
+        "imageSource": "imagen2",
+        "stock": 40,
+        "precio": 250,
+        "categoria": "Pie"
+    },
+    {
+        "id": 5,
+        "title": "Ventilador 20 pulgadas Pared",
+        "cuerpo": "Ventilador de 20 pulgadas de Pared - Motor WEG con doble ruleman y protector térmico - Caudal de aire 14m. Medidas caja 80x80x36cm",
+        "imageSource": "imagen2",
+        "stock": 90,
+        "precio": 165,
+        "categoria": "Pared"
+    },
+    {
+        "id": 6,
+        "title": "Ventilador 20 pulgadas Pie",
+        "cuerpo": "Ventilador de 20 pulgadas de Pie - Motor WEG con doble ruleman y protector térmico - Caudal de aire 14m. Medidas caja 80x80x36cm",
+        "imageSource": "imagen2",
+        "stock": 230,
+        "precio": 185,
+        "categoria": "Pie"
+    },
+    {
+        "id": 7,
+        "title": "Ventilador Techo Chapa",
+        "cuerpo": "Ventilador de Techo palas de chapa (Negro, Blanco o Marrón)",
+        "imageSource": "imagen2",
+        "stock": 90,
+        "precio": 155,
+        "categoria": "Techo"
+    },
+    {
+        "id": 8,
+        "title": "Ventilador Techo Madera",
+        "cuerpo": "Ventilador de Techo palas de madera con herrajes dorados",
+        "imageSource": "imagen2",
+        "stock": 30,
+        "precio": 165,
+        "categoria": "Pared"
+    },
+    {
+        "id": 9,
+        "title": "Calefon Eléctrico Al",
+        "cuerpo": "Calefón eléctrico 25L con resistencia de aluminio",
+        "imageSource": "imagen2",
+        "stock": 3000,
+        "precio": 13,
+        "categoria": "Calefon"
+    },
+    {
+        "id": 10,
+        "title": "Calefon Eléctrico Br",
+        "cuerpo": "Calefón eléctrico 25L con resistencia de bronce",
+        "imageSource": "imagen2",
+        "stock": 4000,
+        "precio": 18,
+        "categoria": "Calefon"
+    }
+]

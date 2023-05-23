@@ -26,10 +26,10 @@ export const ItemDetails = ({ item }) => {
         <div className="col-md-5">
             <div className="card text-center bg-light animate__animated animate__fadeInUp">
                 <div className="overflow">
-                    <img src={item.imagen} className="card-img-top" alt={item.titulo} />
+                    <img src={item.imageSource} className="card-img-top" alt={item.title} />
                 </div>
                 <div className="card-body text-light">
-                    <h4 style={{ color: 'black' }} className="card-title">{item.titulo}</h4>
+                    <h4 style={{ color: 'black' }} className="card-title">{item.title}</h4>
                     <p className="card-text text-dark">
                         {item.cuerpo}
                     </p>

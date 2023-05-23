@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, provider } from "../Firebase/Config";
+import { Alert } from "bootstrap";
 
 
 export const AuthContext = createContext()
@@ -16,7 +17,7 @@ export const AuthProvider = ({children}) => {
 
     const login = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
-            .catch(e => console.log(e))
+            .catch(e => alert(e.message))
 
     }
 
@@ -25,11 +26,13 @@ export const AuthProvider = ({children}) => {
             .then((result) => {
                 console.log(result)
             })
+            .catch(e => alert(e.message))
     }
 
     const register = (values) => {
         createUserWithEmailAndPassword(auth, values.email, values.password)
-            .catch(e => console.log(e))
+            .catch(e => alert(e.message))
+            
     }  
 
     const logout = () => {

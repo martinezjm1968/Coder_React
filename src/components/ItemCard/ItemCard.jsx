@@ -18,10 +18,10 @@ export const ItemCard = ({ item }) => {
             <div className='col-3 m-3'>
                 <div className="card text-center bg-light animate__animated animate__fadeInUp">
                     <div className="overflow">
-                        <img src={item.imagen} className="card-img-top" alt={item.titulo} />
+                        <img src={item.imageSource} className="card-img-top" alt={item.title} />
                     </div>
                     <div className="card-body text-light" >
-                        <h4 style={{ color: 'black' }} className="card-title">{item.titulo}</h4>
+                        <h4 style={{ color: 'black' }} className="card-title">{item.title}</h4>
 
 
                         <a style={{ color: 'black' }}> Stock actual: {item.stock}  </a>
