@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'
 import { collection, addDoc, doc, updateDoc, getDoc } from "firebase/firestore"
 import { db } from "../Firebase/Config.js"
 import { Link } from "react-router-dom"
+import "../Cart/Cart.css"
 
 export const Checkout = () => {
     const { cart, totalCompra, emptyCart } = useContext(CartContext)
@@ -93,7 +94,7 @@ export const Checkout = () => {
 
 
     return (
-        <div>
+        <div className="right-column">
 
 
             <h2>Checkout</h2>
@@ -131,4 +132,3 @@ export const Checkout = () => {
     )
 }
 
-// <div className="container my-5"></div>
