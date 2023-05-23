@@ -146,7 +146,7 @@ export const Checkout = () => {
                             className="form-control my-2"
                             type="text"
                             value={values.nombre}
-                            placeholder="Nombre"
+                            placeholder="Nombre y Apellido"
                             name="nombre"
                             onChange={handleInput}
                         />

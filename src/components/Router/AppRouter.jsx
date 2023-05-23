@@ -36,6 +36,7 @@ const AppRouter = () => {
                             <Route path='/cart' element={<Cart />} />
                             <Route path='/carrito' element={<CartWidget />} />
                             <Route path='/checkout' element={<Checkout />} />
+                            
                         </>
                         :
                         <>
