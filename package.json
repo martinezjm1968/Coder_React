@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/mercadopago": "^1.5.8",
     "bootstrap": "^5.2.3",
     "firebase": "^9.22.0",
+    "mercadopago": "^1.5.16",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.3",
     "react-dom": "^18.2.0",

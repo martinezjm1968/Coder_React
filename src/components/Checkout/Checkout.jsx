@@ -18,6 +18,8 @@ export const Checkout = () => {
     const [values, setValues] = useState({
         nombre: '',
         direccion: '',
+        tel: '',
+        cuit: '',
         email: user.email,
         totalCompra: totalCompra()
     })
@@ -33,7 +35,7 @@ export const Checkout = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const { nombre, direccion, email } = values
+        const { nombre, direccion, email, tel, cuit } = values
 
         if (nombre.length < 3) {
             alert("El nombre demasiado corto")
@@ -43,6 +45,17 @@ export const Checkout = () => {
             alert("Dirección inválida")
             return
         }
+        
+        if (tel.length < 11) {
+            alert("Teléfono inválido")
+            return
+        }
+
+        if (cuit.length != 11) {
+            alert("CUIT inválido")
+            return
+        }
+
         if (email.length < 5) {
             alert("Email inválido")
             return
@@ -156,6 +169,22 @@ export const Checkout = () => {
                             value={values.direccion}
                             placeholder="Dirección"
                             name="direccion"
+                            onChange={handleInput}
+                        />
+                        <input
+                            className="form-control my-2"
+                            type="tel"
+                            value={values.tel}
+                            placeholder="Teléfono (caracteristica + nro)"
+                            name="tel"
+                            onChange={handleInput}
+                        />
+                        <input
+                            className="form-control my-2"
+                            type="cuit"
+                            value={values.cuit}
+                            placeholder="CUIT"
+                            name="cuit"
                             onChange={handleInput}
                         />
                         <input
