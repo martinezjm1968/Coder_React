@@ -1,66 +1,46 @@
 import { useContext, useState } from "react"
 import { CartContext } from "../Context/CartContext"
 import { Navigate } from 'react-router-dom'
-import { collection, addDoc, doc, updateDoc, getDoc } from "firebase/firestore"
+import { collection, getDoc, addDoc, writeBatch, doc } from "firebase/firestore"
 import { db } from "../Firebase/Config.js"
 import { Link } from "react-router-dom"
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import { AuthContext } from "../Context/AuthContext";
-import "../Cart/Cart.css"
-import { CotizacionDolar } from '../Context/CotizacionDolar';
 import { FaTrashAlt } from 'react-icons/fa';
+import { CotizacionDolar } from '../Context/CotizacionDolar';
+
+const schema = Yup.object().shape({
+    nombre: Yup.string()
+                .required("Este campo es requerido")
+                .min(3, "El nombre es muy corto")
+                .max(20, "El nombre es demasiado largo"),
+    direccion: Yup.string()
+                .required("Este campo es requerido")
+                .min(6, "La direccion es muy corta")
+                .max(40, "La direccion es demasiado larga"),
+    tel: Yup.string()
+                .required("Este campo es requerido")
+                .min(10, "El tel debe tener al menos 10 digitos")
+                .max(20, "El nro tel es demasiado larga"),
+    cuit: Yup.string()
+                .required("Este campo es requerido")
+                .min(11, "Debe tener 11 digitos")
+                .max(12, "Debe tener 11 digitos"),
+    email: Yup.string()
+                .email("El email no es válido")
+                .required("Este campo es requerido")
+})
 
 
 export const Checkout = () => {
     const { cart, totalCompra, emptyCart } = useContext(CartContext)
     const { user } = useContext(AuthContext)
+    const [orderId, setOrderId] = useState(null)
     const { dolar } = useContext(CotizacionDolar)
 
-    const [values, setValues] = useState({
-        nombre: '',
-        direccion: '',
-        tel: '',
-        cuit: '',
-        email: user.email,
-        totalCompra: totalCompra()
-    })
-    const [orderId, setOrderId] = useState(null)
-
-    const handleInput = (e) => {
-        setValues({
-            ...values,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        const { nombre, direccion, email, tel, cuit } = values
-
-        if (nombre.length < 3) {
-            alert("El nombre demasiado corto")
-            return
-        }
-        if (direccion.length < 3) {
-            alert("Dirección inválida")
-            return
-        }
-        
-        if (tel.length < 11) {
-            alert("Teléfono inválido")
-            return
-        }
-
-        if (cuit.length != 11) {
-            alert("CUIT inválido")
-            return
-        }
-
-        if (email.length < 5) {
-            alert("Email inválido")
-            return
-        }
-
+    
+    const generarOrden = async (values) => {
         const orden = {
             client: values,
             items: cart.map(item => ({ id: item.id, nombre: item.title, cantidad: item.cantidad })),
@@ -69,32 +49,48 @@ export const Checkout = () => {
         }
 
 
-        orden.items.forEach((item) => {
-            const itemRef = doc(db, "items", item.id)
-
-            getDoc(itemRef)
-                .then((doc) => {
-                    if (doc.data().stock >= item.cantidad) {
-                        updateDoc(itemRef, {
-                            stock: doc.data().stock - item.cantidad
-                        })
-                    } else {
-                        alert("No hay stock de " + item.title)
-                    }
-                })
-        })
-
-
-
+        const batch = writeBatch(db)
+        const productosRef = collection(db, "items")
         const ordersRef = collection(db, "orders")
 
-        addDoc(ordersRef, orden)
-            .then((doc) => {
-                setOrderId(doc.id)
-                emptyCart()
-            })
-    }
+        const promesas = cart.map((item) => {
+            const ref = doc(productosRef, item.id)
+            return getDoc(ref)
+        })
 
+        const productos = await Promise.all(promesas)
+
+        const outOfStock = []
+
+        productos.forEach((doc) => {
+            const item = cart.find((i) => i.id === doc.id)
+            const stock = doc.data().stock
+            
+            if (stock >= item.cantidad) {
+                batch.update(doc.ref, {
+                    stock: stock - item.cantidad
+                })
+            } else {
+                outOfStock.push(item)
+                
+            }
+        })
+
+        
+        if (outOfStock.length === 0) {
+            addDoc(ordersRef, orden)
+                .then((doc) => {
+                        batch.commit()
+                        setOrderId(doc.id)
+                        emptyCart()
+                    })
+        } else {
+            
+            alert("Posee ITEMS sin stock!")
+        }
+        
+    }
+    
     if (orderId) {
         return (
             <div className="contenedor_cart">
@@ -153,56 +149,44 @@ export const Checkout = () => {
                         <hr />
 
                     </div>
-                    <hr />
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            className="form-control my-2"
-                            type="text"
-                            value={values.nombre}
-                            placeholder="Nombre y Apellido"
-                            name="nombre"
-                            onChange={handleInput}
-                        />
-                        <input
-                            className="form-control my-2"
-                            type="text"
-                            value={values.direccion}
-                            placeholder="Dirección"
-                            name="direccion"
-                            onChange={handleInput}
-                        />
-                        <input
-                            className="form-control my-2"
-                            type="tel"
-                            value={values.tel}
-                            placeholder="Teléfono (caracteristica + nro)"
-                            name="tel"
-                            onChange={handleInput}
-                        />
-                        <input
-                            className="form-control my-2"
-                            type="cuit"
-                            value={values.cuit}
-                            placeholder="CUIT"
-                            name="cuit"
-                            onChange={handleInput}
-                        />
-                        <input
-                            className="form-control my-2"
-                            type="email"
-                            value={values.email}
-                            placeholder="Email"
-                            name="email"
-                            onChange={handleInput}
-                            readOnly
-                        />
 
-                        <button className="btn btn-primary" type="submit">Enviar</button>
-                    </form>
+
+                    <Formik
+                    initialValues={{
+                        nombre: '',
+                        direccion: '',
+                        tel: '',
+                        cuit: '',
+                        email: user.email
+                    }}
+                    validationSchema={schema}
+                    onSubmit={generarOrden}
+                >
+                    {() => (
+                        <Form>
+                            <Field name="nombre" type="text" placeholder="Nombre y Apellido" className="form-control my-2"/>
+                            <ErrorMessage name="nombre" component={"p"}/>
+                            <Field name="direccion" type="text" placeholder="Direccion completa" className="form-control my-2"/>
+                            <ErrorMessage name="direccion" component={"p"}/>
+
+                            <Field name="tel" type="text" placeholder="Telefono (carcteristica y nro)" className="form-control my-2"/>
+                            <ErrorMessage name="tel" component={"p"}/>
+                            <Field name="cuit" type="text" placeholder="CUIT (sin guiones)" className="form-control my-2"/>
+                            <ErrorMessage name="cuit" component={"p"}/>
+                            
+                            <Field name="email" type="email" placeholder="Email" readOnly className="form-control my-2"/>
+                            <ErrorMessage name="email" component={"p"}/>
+    
+                            <button className="btn btn-primary" type="submit">Enviar</button>
+                        </Form>
+                    )}
+                </Formik>
+
+
+                    
                 </div>
 
             </div>
         </div>
     )
 }
-

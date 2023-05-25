@@ -12,12 +12,14 @@
     "@types/mercadopago": "^1.5.8",
     "bootstrap": "^5.2.3",
     "firebase": "^9.22.0",
-    "mercadopago": "^1.5.16",
+    "formik": "^2.2.9",
+    "mercadopago": "^0.0.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.3",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
