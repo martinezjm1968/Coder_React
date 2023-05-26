@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { MenuNav } from "../MenuNav/MenuNav";
 import { Checkout } from "../Checkout/Checkout";
+import { OrdenesRealizadas } from "../OrdenesRealizadas/OrdenesRealizadas";
 
 
 const AppRouter = () => {
@@ -33,6 +34,7 @@ const AppRouter = () => {
                 {
                     user.logged
                         ? <>
+                            <Route path='/ordenes' element={<OrdenesRealizadas />} />
                             <Route path='/cart' element={<Cart />} />
                             <Route path='/carrito' element={<CartWidget />} />
                             <Route path='/checkout' element={<Checkout />} />
@@ -47,6 +49,7 @@ const AppRouter = () => {
                 }
                 <Route path='*' element={<Navigate to={"/"} />} />
             </Routes>
+            
         </BrowserRouter>
     )
 }
