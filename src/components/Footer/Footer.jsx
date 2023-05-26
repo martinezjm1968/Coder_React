@@ -7,9 +7,7 @@ import House from "../../assets/house.png"
 import Calendar from "../../assets/calendar.png"
 
 import "../Footer/Footer.css"
-import { Component } from "react"
-import BaseComponent from "bootstrap/js/dist/base-component"
-import { PureComponent } from "react"
+
 
 export const Footer = () => {
 

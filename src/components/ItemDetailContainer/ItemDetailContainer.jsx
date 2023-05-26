@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom"
 import { ItemDetails } from "../ItemDetails/ItemDetails"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from '../Firebase/Config'
+import Loader from '../Loader/Loader'
+
+import "../ItemListContainer/Items.css";
 
 
 
@@ -33,12 +36,12 @@ export const ItemDetailContainer = () => {
 
 
     return (
-        <div className="container my-5">
-            <div className="container d-flex justify-content-center align-items-center h-100">
-                <div className="row">
+        <div className="contenedor_detail_itemlist">
+            <div className="grid_detail_list">
+                <div className="row_detail_list">
                     {
                         loading
-                            ? <h2>Cargando...</h2>
+                            ? <Loader />
                             : <ItemDetails item={item} />
                     }
                 </div>

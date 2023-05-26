@@ -11,6 +11,12 @@ export const Cart = () => {
     const { cart, emptyCart, totalCompra, removeItem } = useContext(CartContext)
     const { dolar, setDolar } = useContext(CotizacionDolar)
 
+    const decimales = {
+        maximumFractionDigits: 0 // Establece el número máximo de dígitos decimales a 0
+    };
+    const total = totalCompra()
+    const subtotal = Number(total) / 1.21
+    const IVA = Number(total) - subtotal
 
 
     return (
@@ -28,7 +34,7 @@ export const Cart = () => {
                                     cart.map((item) => (
                                         <div key={item.id}>
                                             <h4>{item.title}</h4>
-                                            <img style={{ width: '80px', height: '80px' }} src={item.imageSource} alt={item.title}/>
+                                            <img style={{ width: '80px', height: '80px' }} src={item.imageSource} alt={item.title} />
                                             <p>Cantidad: {item.cantidad} unidades</p>
                                             <p>Subotal: ${(item.cantidad * dolar.oficial.value_sell * item.precio).toLocaleString()}</p>
                                             <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>
@@ -48,7 +54,10 @@ export const Cart = () => {
                     <br />
                     <div>
                         <br />
-                        <h4>TOTAL: ${totalCompra().toLocaleString()}</h4>
+                        <h5>SubTotal: ${subtotal.toLocaleString('es-AR', decimales)}</h5>
+                        <h5>IVA: ${IVA.toLocaleString('es-AR', decimales)}</h5>
+                        <hr />
+                        <h4>TOTAL: ${totalCompra().toLocaleString('es-AR', decimales)}</h4>
                         <hr />
 
 

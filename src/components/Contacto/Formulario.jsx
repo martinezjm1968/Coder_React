@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { db } from "../Firebase/Config.js"
+import { collection, getDoc, addDoc, writeBatch, doc } from "firebase/firestore"
 import "./Formulario.css"
 
 
@@ -13,7 +15,7 @@ export function Formulario() {
     })
 
     const handleInputChange = (e) => {
-        console.log(e.target.name)
+
 
         setValues({
             ...values,
@@ -21,10 +23,30 @@ export function Formulario() {
         })
     }
 
+    // Para que no se me borren los datos por accidente
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log("SUbmit")
-        console.log(values)
+        e.preventDefault();
+        //console.log("Submit");
+        //console.log(values);
+
+        // Guarda los datos en Firebase
+        const consultaDB = collection(db, 'consultas')
+        addDoc(consultaDB, values)
+            .then(() => {
+                alert("Su consulta fue gurdada correctamente!");
+                // Reiniciar los valores del formulario después de guardar los datos
+                setValues({
+                    name: '',
+                    email: '',
+                    message: '',
+                    tel: '',
+                    dir: '',
+                    cuit: '',
+                });
+            })
+            .catch((error) => {
+                alert("Error al guardar los datos de su consulta!", error);
+            });
     }
 
     return (
@@ -40,6 +62,7 @@ export function Formulario() {
                     className="form-control my-2"
                     type="text"
                     placeholder="Tu nombre"
+                    required
                 />
 
                 <input
@@ -49,6 +72,7 @@ export function Formulario() {
                     className="form-control my-2"
                     type="email"
                     placeholder="email"
+                    required
                 />
 
                 <input
@@ -58,6 +82,7 @@ export function Formulario() {
                     className="form-control my-2"
                     type="text"
                     placeholder="Teléfono"
+                    required
                 />
 
                 <input
@@ -67,6 +92,7 @@ export function Formulario() {
                     className="form-control my-2"
                     type="text"
                     placeholder="Dirección"
+                    required
                 />
 
                 <input
@@ -76,6 +102,7 @@ export function Formulario() {
                     className="form-control my-2"
                     type="text"
                     placeholder="CUIT"
+                    required
                 />
 
                 <input
@@ -85,6 +112,7 @@ export function Formulario() {
                     className="form-control my-2"
                     type="text"
                     placeholder="Mensaje"
+                    required
                 />
 
                 <br />

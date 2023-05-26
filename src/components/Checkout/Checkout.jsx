@@ -12,24 +12,24 @@ import { CotizacionDolar } from '../Context/CotizacionDolar';
 
 const schema = Yup.object().shape({
     nombre: Yup.string()
-                .required("Este campo es requerido")
-                .min(3, "El nombre es muy corto")
-                .max(20, "El nombre es demasiado largo"),
+        .required("Este campo es requerido")
+        .min(3, "El nombre es muy corto")
+        .max(20, "El nombre es demasiado largo"),
     direccion: Yup.string()
-                .required("Este campo es requerido")
-                .min(6, "La direccion es muy corta")
-                .max(40, "La direccion es demasiado larga"),
+        .required("Este campo es requerido")
+        .min(6, "La direccion es muy corta")
+        .max(40, "La direccion es demasiado larga"),
     tel: Yup.string()
-                .required("Este campo es requerido")
-                .min(10, "El tel debe tener al menos 10 digitos")
-                .max(20, "El nro tel es demasiado larga"),
+        .required("Este campo es requerido")
+        .min(10, "El tel debe tener al menos 10 digitos")
+        .max(20, "El nro tel es demasiado larga"),
     cuit: Yup.string()
-                .required("Este campo es requerido")
-                .min(11, "Debe tener 11 digitos")
-                .max(12, "Debe tener 11 digitos"),
+        .required("Este campo es requerido")
+        .min(11, "CUIT debe tener 11 digitos")
+        .max(12, "CUIT debe tener 11 digitos"),
     email: Yup.string()
-                .email("El email no es válido")
-                .required("Este campo es requerido")
+        .email("El email no es válido")
+        .required("Este campo es requerido")
 })
 
 
@@ -39,7 +39,13 @@ export const Checkout = () => {
     const [orderId, setOrderId] = useState(null)
     const { dolar } = useContext(CotizacionDolar)
 
-    
+    const decimales = {
+        maximumFractionDigits: 0 // Establece el número máximo de dígitos decimales a 0
+    };
+    const total = totalCompra()
+    const subtotal = Number(total) / 1.21
+    const IVA = Number(total) - subtotal
+
     const generarOrden = async (values) => {
         const orden = {
             client: values,
@@ -65,32 +71,32 @@ export const Checkout = () => {
         productos.forEach((doc) => {
             const item = cart.find((i) => i.id === doc.id)
             const stock = doc.data().stock
-            
+
             if (stock >= item.cantidad) {
                 batch.update(doc.ref, {
                     stock: stock - item.cantidad
                 })
             } else {
                 outOfStock.push(item)
-                
+
             }
         })
 
-        
+
         if (outOfStock.length === 0) {
             addDoc(ordersRef, orden)
                 .then((doc) => {
-                        batch.commit()
-                        setOrderId(doc.id)
-                        emptyCart()
-                    })
+                    batch.commit()
+                    setOrderId(doc.id)
+                    emptyCart()
+                })
         } else {
-            
+
             alert("Posee ITEMS sin stock!")
         }
-        
+
     }
-    
+
     if (orderId) {
         return (
             <div className="contenedor_cart">
@@ -145,45 +151,48 @@ export const Checkout = () => {
                     <hr />
                     <div>
                         <br />
-                        <h4>TOTAL: ${totalCompra().toLocaleString()}</h4>
+                        <h5>SubTotal: ${subtotal.toLocaleString('es-AR', decimales)}</h5>
+                        <h5>IVA: ${IVA.toLocaleString('es-AR', decimales)}</h5>
+                        <hr />
+                        <h4>TOTAL: ${totalCompra().toLocaleString('es-AR', decimales)}</h4>
                         <hr />
 
                     </div>
 
 
                     <Formik
-                    initialValues={{
-                        nombre: '',
-                        direccion: '',
-                        tel: '',
-                        cuit: '',
-                        email: user.email
-                    }}
-                    validationSchema={schema}
-                    onSubmit={generarOrden}
-                >
-                    {() => (
-                        <Form>
-                            <Field name="nombre" type="text" placeholder="Nombre y Apellido" className="form-control my-2"/>
-                            <ErrorMessage name="nombre" component={"p"}/>
-                            <Field name="direccion" type="text" placeholder="Direccion completa" className="form-control my-2"/>
-                            <ErrorMessage name="direccion" component={"p"}/>
+                        initialValues={{
+                            nombre: '',
+                            direccion: '',
+                            tel: '',
+                            cuit: '',
+                            email: user.email
+                        }}
+                        validationSchema={schema}
+                        onSubmit={generarOrden}
+                    >
+                        {() => (
+                            <Form>
+                                <Field name="nombre" type="text" placeholder="Nombre y Apellido" className="form-control my-2" />
+                                <ErrorMessage name="nombre" component={"p"} />
+                                <Field name="direccion" type="text" placeholder="Direccion completa" className="form-control my-2" />
+                                <ErrorMessage name="direccion" component={"p"} />
 
-                            <Field name="tel" type="text" placeholder="Telefono (carcteristica y nro)" className="form-control my-2"/>
-                            <ErrorMessage name="tel" component={"p"}/>
-                            <Field name="cuit" type="text" placeholder="CUIT (sin guiones)" className="form-control my-2"/>
-                            <ErrorMessage name="cuit" component={"p"}/>
-                            
-                            <Field name="email" type="email" placeholder="Email" readOnly className="form-control my-2"/>
-                            <ErrorMessage name="email" component={"p"}/>
-    
-                            <button className="btn btn-primary" type="submit">Enviar</button>
-                        </Form>
-                    )}
-                </Formik>
+                                <Field name="tel" type="text" placeholder="Telefono (carcteristica y nro)" className="form-control my-2" />
+                                <ErrorMessage name="tel" component={"p"} />
+                                <Field name="cuit" type="text" placeholder="CUIT (sin guiones)" className="form-control my-2" />
+                                <ErrorMessage name="cuit" component={"p"} />
+
+                                <Field name="email" type="email" placeholder="Email" readOnly className="form-control my-2" />
+                                <ErrorMessage name="email" component={"p"} />
+
+                                <button className="btn btn-primary" type="submit">Enviar</button>
+                            </Form>
+                        )}
+                    </Formik>
 
 
-                    
+
                 </div>
 
             </div>

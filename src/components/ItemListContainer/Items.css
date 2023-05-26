@@ -55,3 +55,28 @@
 .card:hover {
     transform: scale(1.035);
 }
+
+@media (max-width: 768px) {
+    .contenedor_detail_itemlist {
+        grid-gap: 10px;
+    }
+
+    .grid_detail_list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .row_detail_list {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor_itemlist,
+    .contenedor_itemDitail {
+        max-width: 100%;
+    }
+
+    .grid-list {
+        grid-template-columns: auto auto;
+    }
+}
