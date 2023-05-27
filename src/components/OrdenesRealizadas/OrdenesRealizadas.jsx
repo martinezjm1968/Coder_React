@@ -4,10 +4,11 @@ import { collection, query, where, getDocs } from "firebase/firestore"
 import "firebase/firestore";
 import { db } from "../Firebase/Config.js"
 import { AuthContext } from "../Context/AuthContext";
-
+import Loader from '../Loader/Loader'
 
 export const OrdenesRealizadas = () => {
     const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true)
 
 
     console.log("Estoy en ordenes realizadas!!!!!");
@@ -19,7 +20,7 @@ export const OrdenesRealizadas = () => {
 
 
     useEffect(() => {
-
+        setLoading(true)
         console.log("Mail registrado: " + userEmail);
         // 1.- Armar una referencia (sync)
         const ordenes = collection(db, "orders")
@@ -39,26 +40,32 @@ export const OrdenesRealizadas = () => {
                 setOrders(docs)
             })
             .catch(e => alert(e))
+            .finally(() => setLoading(false))
 
     }, [])
 
 
     console.log("Que tiene orders: " + orders);
     return (
+
         <div className="container my-2 justify-content-center bg-light">
             <div>
                 <h2>Órdenes del usuario: {userEmail}</h2>
-                <ul>
-                    {orders.map((order) => (
-                        <div>
-                            <p>Nombre: {order.client.nombre}</p>
-                            <p>Direccion: {order.client.direccion}</p>
-                            <p>CUIT: {order.client.cuit}</p>
-                            <p>Total: ${(order.total).toLocaleString()}</p>
-                            <hr />
-                        </div>
-                    ))}
-                </ul>
+                {loading
+                    ? <Loader />
+                    : (
+                        <ul>
+                            {orders.map((order) => (
+                                <div>
+                                    <p>Nombre: {order.client.nombre}</p>
+                                    <p>Direccion: {order.client.direccion}</p>
+                                    <p>CUIT: {order.client.cuit}</p>
+                                    <p>Total: ${(order.total).toLocaleString()}</p>
+                                    <hr />
+                                </div>
+                            ))}
+                        </ul>)
+                }
             </div>
         </div>
     );
