@@ -45,7 +45,7 @@ export const OrdenesRealizadas = () => {
     }, [])
 
 
-    console.log("Que tiene orders: " + orders);
+    
     return (
 
         //<div className="container my-2 justify-content-center bg-light">
@@ -54,6 +54,7 @@ export const OrdenesRealizadas = () => {
                 <div className="left-column">
 
                     <h2>Órdenes del usuario: {userEmail}</h2>
+                    
                     {loading
                         ? <Loader />
                         : (
