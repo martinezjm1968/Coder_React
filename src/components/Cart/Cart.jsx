@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import { FaTrashAlt } from 'react-icons/fa';
 import { CotizacionDolar } from '../Context/CotizacionDolar';
@@ -18,14 +18,12 @@ export const Cart = () => {
     const subtotal = Number(total) / 1.21
     const IVA = Number(total) - subtotal
 
-
     return (
         <div className="contenedor_cart">
             <div className="grid-container">
                 <div className="left-column">
                     <div className="row">
                         <div>
-
 
                             <h2>Tu compra</h2>
                             <hr />
@@ -35,6 +33,7 @@ export const Cart = () => {
                                         <div key={item.id}>
                                             <h4>{item.title}</h4>
                                             <img style={{ width: '80px', height: '80px' }} src={item.imageSource} alt={item.title} />
+                                            
                                             <p>Cantidad: {item.cantidad} unidades</p>
                                             <p>Subotal: ${(item.cantidad * dolar.oficial.value_sell * item.precio).toLocaleString()}</p>
                                             <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>

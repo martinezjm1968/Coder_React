@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { CartContext } from "../Context/CartContext"
 import { Navigate } from 'react-router-dom'
 import { collection, getDoc, addDoc, writeBatch, doc } from "firebase/firestore"
@@ -38,6 +38,11 @@ export const Checkout = () => {
     const { user } = useContext(AuthContext)
     const [orderId, setOrderId] = useState(null)
     const { dolar } = useContext(CotizacionDolar)
+
+    const [fechaCompra, setCurrentDate] = useState(new Date());
+    useEffect(() => {
+        setCurrentDate(new Date());
+    }, []);
 
     const decimales = {
         maximumFractionDigits: 0 // Establece el número máximo de dígitos decimales a 0
@@ -133,6 +138,7 @@ export const Checkout = () => {
                                         <div key={item.id}>
                                             <h4>{item.title}</h4>
                                             <img style={{ width: '80px', height: '80px' }} src={item.imageSource} alt={item.title} />
+                                            <p>Fecha de compra: {fechaCompra.toLocaleDateString()}</p>
                                             <p>Cantidad: {item.cantidad} unidades</p>
                                             <p>Subotal: ${(item.cantidad * dolar.oficial.value_sell * item.precio).toLocaleString()}</p>
                                             <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>
@@ -166,6 +172,7 @@ export const Checkout = () => {
                             direccion: '',
                             tel: '',
                             cuit: '',
+                            fecha: fechaCompra,
                             email: user.email
                         }}
                         validationSchema={schema}
@@ -182,6 +189,9 @@ export const Checkout = () => {
                                 <ErrorMessage name="tel" component={"p"} />
                                 <Field name="cuit" type="text" placeholder="CUIT (sin guiones)" className="form-control my-2" />
                                 <ErrorMessage name="cuit" component={"p"} />
+
+                                <Field name="fecha" type="text" placeholder="Fecha" readonly className="form-control my-2" />
+                                <ErrorMessage name="fecha" component={"p"} />
 
                                 <Field name="email" type="email" placeholder="Email" readOnly className="form-control my-2" />
                                 <ErrorMessage name="email" component={"p"} />

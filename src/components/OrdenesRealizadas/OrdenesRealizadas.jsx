@@ -10,14 +10,12 @@ export const OrdenesRealizadas = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true)
 
-
     console.log("Estoy en ordenes realizadas!!!!!");
 
     // Obtén el usuario logeado y su dirección de correo electrónico
     //const { user } = useContext(AuthContext)
     const { user } = useContext(AuthContext)
     const userEmail = user.email;
-
 
     useEffect(() => {
         setLoading(true)
@@ -38,34 +36,28 @@ export const OrdenesRealizadas = () => {
                     }
                 })
                 setOrders(docs)
+                
             })
             .catch(e => alert(e))
             .finally(() => setLoading(false))
-
     }, [])
 
-
-    
     return (
 
-        //<div className="container my-2 justify-content-center bg-light">
         <div className="contenedor_cart">
             <div className="grid-container">
                 <div className="left-column">
-
-                    <h2>Órdenes del usuario: {userEmail}</h2>
-                    
+                    <h4>Órdenes del usuario: {userEmail}</h4>
                     {loading
                         ? <Loader />
                         : (
                             <ul>
-
-
                                 {orders.map((order) => (
                                     <div className="row">
                                         <p>Nombre: {order.client.nombre}</p>
                                         <p>Direccion: {order.client.direccion}</p>
                                         <p>CUIT: {order.client.cuit}</p>
+                                        <p>Fecha de compra: {order.client.fecha.toDate().toLocaleDateString()}</p>
                                         <p>Total: ${(order.total).toLocaleString()}</p>
                                         <ul>
                                             <div className="right-column">
@@ -73,7 +65,7 @@ export const OrdenesRealizadas = () => {
                                                     <li key={item.id}>
                                                         <p> Producto: {item.nombre} </p>
                                                         <p> Cantidad: {item.cantidad} </p>
-                                                        <hr/>
+                                                        <hr />
                                                     </li>
                                                 ))}
                                             </div>
