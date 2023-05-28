@@ -1,4 +1,21 @@
 export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
+
+    const handleChange = (e) => {
+        let value = parseInt(e.target.value);
+        if (isNaN(value)) {
+            value = 1;
+        } else {
+            if (value>stock) {
+                value = stock;
+            } else {
+                if (value <= 0){
+                    value = 1;
+                }
+            }
+        }
+        setCantidad(value);
+    };
+
     const handleRestar = () => {
         cantidad > 1 && setCantidad(cantidad - 1)
     }
@@ -16,7 +33,16 @@ export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
                 disabled={cantidad === 1}
             > - </button>
 
-            <span style={{ color: 'black' }} className="mx-2">{cantidad}</span>
+            <input
+                type="number"
+                min={1}
+                max={stock}
+                value={cantidad}
+                maxlength="4"
+                onChange={handleChange}
+                style={{ color: 'withe' }}
+            />
+            {/*<span style={{ color: 'black' }} className="mx-2">{cantidad}</span>*/}
 
             <button
                 onClick={handleSumar}

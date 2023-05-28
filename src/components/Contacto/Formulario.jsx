@@ -5,14 +5,17 @@ import "./Formulario.css"
 
 
 export function Formulario() {
+    const [fechaConsulta, setCurrentDate] = useState(new Date());
     const [values, setValues] = useState({
         name: '',
         email: '',
         message: '',
         tel: '',
         dir: '',
-        cuit: ''
+        cuit: '',
+        fecha: fechaConsulta
     })
+    
 
     const handleInputChange = (e) => {
 
@@ -42,6 +45,7 @@ export function Formulario() {
                     tel: '',
                     dir: '',
                     cuit: '',
+                    fecha: fechaConsulta
                 });
             })
             .catch((error) => {
