@@ -54,7 +54,7 @@ export const Checkout = () => {
     const generarOrden = async (values) => {
         const orden = {
             client: values,
-            items: cart.map(item => ({ id: item.id, nombre: item.title, cantidad: item.cantidad })),
+            items: cart.map(item => ({ id: item.id, nombre: item.title, cantidad: item.cantidad, precio: item.precio })),
             total: totalCompra(),
             fyh: new Date()
         }

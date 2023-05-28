@@ -5,12 +5,14 @@ import "firebase/firestore";
 import { db } from "../Firebase/Config.js"
 import { AuthContext } from "../Context/AuthContext";
 import Loader from '../Loader/Loader'
+import { CotizacionDolar } from '../Context/CotizacionDolar';
+import "../Cart/Cart.css"
 
 export const OrdenesRealizadas = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true)
-
-    console.log("Estoy en ordenes realizadas!!!!!");
+    const { dolar } = useContext(CotizacionDolar)
+    
 
     // Obtén el usuario logeado y su dirección de correo electrónico
     //const { user } = useContext(AuthContext)
@@ -19,14 +21,14 @@ export const OrdenesRealizadas = () => {
 
     useEffect(() => {
         setLoading(true)
-        console.log("Mail registrado: " + userEmail);
+        
         // 1.- Armar una referencia (sync)
         const ordenes = collection(db, "orders")
         const q = userEmail
             ? query(ordenes, where("client.email", "==", userEmail))
             : ordenes
         // 2.- Consumir esa referencia (async)
-        console.log("Que tiene q:" + q);
+        
         getDocs(q)
             .then((res) => {
                 const docs = res.docs.map((doc) => {
@@ -36,7 +38,7 @@ export const OrdenesRealizadas = () => {
                     }
                 })
                 setOrders(docs)
-                
+
             })
             .catch(e => alert(e))
             .finally(() => setLoading(false))
@@ -53,23 +55,27 @@ export const OrdenesRealizadas = () => {
                         : (
                             <ul>
                                 {orders.map((order) => (
+
                                     <div className="row">
                                         <p>Nombre: {order.client.nombre}</p>
                                         <p>Direccion: {order.client.direccion}</p>
                                         <p>CUIT: {order.client.cuit}</p>
                                         <p>Fecha de compra: {order.client.fecha.toDate().toLocaleDateString()}</p>
                                         <p>Total: ${(order.total).toLocaleString()}</p>
-                                        <ul>
-                                            <div className="right-column">
-                                                {order.items.map((item) => (
-                                                    <li key={item.id}>
-                                                        <p> Producto: {item.nombre} </p>
-                                                        <p> Cantidad: {item.cantidad} </p>
-                                                        <hr />
-                                                    </li>
-                                                ))}
-                                            </div>
-                                        </ul>
+                                        <div>
+                                            <ul>
+                                                <div className="right-column">
+                                                    {order.items.map((item) => (
+                                                        <li key={item.id}>
+                                                            <p> Producto: {item.nombre} </p>
+                                                            <p> Cantidad: {item.cantidad} </p>
+                                                            <p> Precio: u${item.precio}</p>
+                                                            <p> Precio u$s Actual: ${(item.precio * dolar.oficial.value_sell).toLocaleString()}</p>
+                                                        </li>
+                                                    ))}
+                                                </div>
+                                            </ul>
+                                        </div>
                                         <hr />
                                     </div>
                                 ))}
