@@ -18,18 +18,31 @@ export function Formulario() {
     
 
     const handleInputChange = (e) => {
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cd81cad93054cd37966f6df7afaaef3cfbd52d11
         setValues({
             ...values,
             [e.target.name]: e.target.value
         })
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd81cad93054cd37966f6df7afaaef3cfbd52d11
     // Para que no se me borren los datos por accidente
     const handleSubmit = (e) => {
         e.preventDefault();
         //console.log("Submit");
         //console.log(values);
 
+<<<<<<< HEAD
         // Guarda los datos en Firebase de manera directa. En Checkout se guardan de manera batch
+=======
+        // Guarda los datos en Firebase
+>>>>>>> cd81cad93054cd37966f6df7afaaef3cfbd52d11
         const consultaDB = collection(db, 'consultas')
         addDoc(consultaDB, values)
             .then(() => {

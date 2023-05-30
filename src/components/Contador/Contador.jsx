@@ -35,6 +35,7 @@ export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
                 disabled={cantidad === 1}
             > - </button>
 
+<<<<<<< HEAD
             <input 
                 className = "input_checkout"
                 type="number" 
@@ -43,6 +44,16 @@ export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
                 value={cantidad}
                 onChange={handleChange}
                 
+=======
+            <input
+                type="number"
+                min={1}
+                max={stock}
+                value={cantidad}
+                maxlength="4"
+                onChange={handleChange}
+                style={{ color: 'withe' }}
+>>>>>>> cd81cad93054cd37966f6df7afaaef3cfbd52d11
             />
             {/*<span style={{ color: 'black' }} className="mx-2">{cantidad}</span>*/}
 

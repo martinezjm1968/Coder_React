@@ -53,7 +53,10 @@ export function MenuNav() {
                             </NavDropdown>
 
                             <Nav.Link as='span'><Link to='/Contacto' style={{ color: 'black', textDecoration: 'none' }}>Contacto</Link></Nav.Link>
+<<<<<<< HEAD
                             <Nav.Link as='span'><Link to='/Alta' style={{ color: 'black', textDecoration: 'none' }}>Alta/Modif Clientes</Link></Nav.Link>
+=======
+>>>>>>> cd81cad93054cd37966f6df7afaaef3cfbd52d11
                             {user.logged ?
                                 <Nav.Link as='span'><Link to='/Ordenes' style={{ color: 'black', textDecoration: 'none' }}>Ordenes Realizadas</Link></Nav.Link>
                                 : ""

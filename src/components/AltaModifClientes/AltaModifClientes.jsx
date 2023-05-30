@@ -21,7 +21,6 @@ export const AltaModifClientes = () => {
     const [pais, setPais] = useState('');
     const [cpostal, setCpostal] = useState('');
 
-
     const validarCliente = async () => {
 
         // 1.- Armar una referencia (sync)

@@ -14,7 +14,11 @@ import { AuthContext } from "../Context/AuthContext";
 import { MenuNav } from "../MenuNav/MenuNav";
 import { Checkout } from "../Checkout/Checkout";
 import { OrdenesRealizadas } from "../OrdenesRealizadas/OrdenesRealizadas";
+<<<<<<< HEAD
 import { AltaModifClientes } from "../AltaModifClientes/AltaModifClientes";
+=======
+
+>>>>>>> cd81cad93054cd37966f6df7afaaef3cfbd52d11
 
 const AppRouter = () => {
     const { user } = useContext(AuthContext)
