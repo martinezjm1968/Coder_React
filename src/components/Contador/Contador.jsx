@@ -7,10 +7,10 @@ export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
         if (isNaN(value)) {
             value = 1;
         } else {
-            if (value>stock) {
+            if (value > stock) {
                 value = stock;
             } else {
-                if (value <= 0){
+                if (value <= 0) {
                     value = 1;
                 }
             }
@@ -31,41 +31,37 @@ export const Contador = ({ cantidad, setCantidad, stock, agregar }) => {
             <button
                 onClick={handleRestar}
                 className={`btn mx-1 ${cantidad === 1 ? "btn-outline-danger" : "btn-outline-primary"}`}
-
                 disabled={cantidad === 1}
             > - </button>
 
-<<<<<<< HEAD
-            <input 
-                className = "input_checkout"
-                type="number" 
-                min={1}
-                max={stock}
-                value={cantidad}
-                onChange={handleChange}
-                
-=======
             <input
+                className="input_checkout"
                 type="number"
                 min={1}
                 max={stock}
                 value={cantidad}
-                maxlength="4"
                 onChange={handleChange}
-                style={{ color: 'withe' }}
->>>>>>> cd81cad93054cd37966f6df7afaaef3cfbd52d11
+
             />
+            {/* <input
+                type="number"
+                min={1}
+                max={stock}
+                value={cantidad}
+                width={"40px"}
+                onChange={handleChange}
+                style={{ color: 'black' }}
+            />*/}
             {/*<span style={{ color: 'black' }} className="mx-2">{cantidad}</span>*/}
 
             <button
                 onClick={handleSumar}
                 className={`btn mx-1 ${cantidad === stock ? "btn-outline-danger" : "btn-outline-primary"}`}
-                disabled={cantidad === stock}
+            //disabled={cantidad === stock}
             > + </button>
 
             <br />
             <br />
-
             <button
                 onClick={agregar}
                 type="button"
