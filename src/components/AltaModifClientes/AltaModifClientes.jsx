@@ -62,9 +62,7 @@ export const AltaModifClientes = () => {
             console.log("El cliente existe!");
             // El cliente existe, actualizar los valores
             const cliente = snapshot.docs[0].data();
-            console.log("Cliente: " + cliente);
             const clienteId = snapshot.docs[0].id;
-            console.log("ClienteID: " + clienteId);
             const clienteMail = doc(db, "Clientes", clienteId);
 
             const clienteActualizado = {
