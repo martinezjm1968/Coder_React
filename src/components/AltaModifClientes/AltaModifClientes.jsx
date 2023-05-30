@@ -55,16 +55,16 @@ export const AltaModifClientes = () => {
 
             await addDoc(clientesRef, nuevoCliente);
             console.log('Cliente agregado:', nuevoCliente);
-            
+
 
         } else {
 
             console.log("El cliente existe!");
             // El cliente existe, actualizar los valores
             const cliente = snapshot.docs[0].data();
-            console.log("Cliente: " +cliente);
+            console.log("Cliente: " + cliente);
             const clienteId = snapshot.docs[0].id;
-            console.log("ClienteID: " +clienteId);
+            console.log("ClienteID: " + clienteId);
             const clienteMail = doc(db, "Clientes", clienteId);
 
             const clienteActualizado = {
@@ -103,7 +103,7 @@ export const AltaModifClientes = () => {
                         onChange={(e) => setName(e.target.value)}
                         className="form-control my-2"
                         type="text"
-                        placeholder="Nombre, Apellido/Razon Social"
+                        placeholder="Nombre, Apellido / Razon Social"
                         required
                     />
                     <input
@@ -138,14 +138,39 @@ export const AltaModifClientes = () => {
                         placeholder="Ciudad"
                         required
                     />
-                    <input
-                        value={provincia}
-                        onChange={(e) => setProvincia(e.target.value)}
-                        className="form-control my-2"
-                        type="text"
-                        placeholder="Provincia"
-                        required
-                    />
+                    <label className="form-control my-2">
+                        Provincia: &nbsp;
+                        <select value={provincia} onChange={(e) => setProvincia(e.target.value)}>
+                            <option value="buenosAires">Buenos Aires</option>
+                            <option value="caba">CABA</option>
+                            <option value="catamarca">Catamarca</option>
+                            <option value="chaco">Chaco</option>
+                            <option value="chubut">Chubut</option>
+                            <option value="cordoba">Cordoba</option>
+                            <option value="corrientes">Corrientes</option>
+                            <option value="entreRios">Entre Rios</option>
+                            <option value="formosa">Formosa</option>
+                            <option value="jujuy">Jujuy</option>
+                            <option value="laPampa">La Pampa</option>
+                            <option value="laRioja">La Rioja</option>
+                            <option value="mendoza">Mendoza</option>
+                            <option value="misiones">Misiones</option>
+                            <option value="neuquen">Neuquen</option>
+                            <option value="rioNegro">Rio Negro</option>
+                            <option value="salta">Salta</option>
+                            <option value="sanJuan">San Juan</option>
+                            <option value="sanLuis">San Luis</option>
+                            <option value="santaCruz">Santa Cruz</option>
+                            <option value="santaFe">Santa Fe</option>
+                            <option value="santiagoDelEstero">Santiago Del Estero</option>
+                            <option value="tierraDelFuego">Tierra Del Fuego</option>
+                            <option value="tucuman">Tucuman</option>
+                            className="form-control my-2"
+                            type="text"
+                            placeholder="Provincia"
+                            required
+                        </select>
+                    </label>
                     <input
                         value={pais}
                         onChange={(e) => setPais(e.target.value)}
@@ -172,20 +197,27 @@ export const AltaModifClientes = () => {
                         placeholder="CUIT"
                         required
                     />
-                    <input
-                        value={iva}
-                        onChange={(e) => setIva(e.target.value)}
-                        className="form-control my-2"
-                        type="text"
-                        placeholder="Tipo IVA"
-                        required
-                    />
+
+                    <label className="form-control my-2">
+                        Tipo IVA: &nbsp;
+                        <select value={iva} onChange={(e) => setIva(e.target.value)}>
+                            <option value="ivaInscripto">IVA Inscripto</option>
+                            <option value="ivaExcento">IVA Excento</option>
+                            <option value="monotributo">Monotributo</option>
+                            <option value="consFinal">Cons Final</option>
+                            className="form-control my-2"
+                            type="text"
+                            placeholder="Tipo IVA"
+                            required
+                        </select>
+                    </label>
+
                     <input
                         value={iibb}
                         onChange={(e) => setIibb(e.target.value)}
                         className="form-control my-2"
                         type="text"
-                        placeholder="Ingresos Brutos)"
+                        placeholder="Ingresos Brutos"
                         required
                     />
                     <button className="btn btn-primary" type="submit">Guardar</button>
