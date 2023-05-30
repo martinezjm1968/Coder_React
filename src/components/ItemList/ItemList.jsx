@@ -1,16 +1,14 @@
 import { ItemCard } from "../ItemCard/ItemCard"
 
-
+import "../ItemListContainer/Items.css";
 
 export const ItemList = ({ items }) => {
 
     return (
-        <div className="row">
+        <div className="grid-list">
             {
                 items.map((prod) => <ItemCard item={prod} key={prod.id} />)
             }
         </div >
     )
 }
-
-//<div className="container d-flex justify-content-center align-items-center h-100"></div>

@@ -12,7 +12,7 @@ export const useProductos = () => {
 
         pedirDatos()
             .then((data) => setProductos(data))
-            .catch((err) => console.log(err))
+            .catch((err) => alert(err))
             .finally(() => setLoading(false))
     }, [])
 

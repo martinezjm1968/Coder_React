@@ -6,50 +6,60 @@ import Nautico from '../../../assets/Logos/Nautico.png'
 
 export function Clientes() {
     return (
-        <Container>
-            <Row>
-                <p>Algunos de nuestro clientes</p>
-            </Row>
-            <Row>
-                <Carousel
-                    interval={3000}
-                    slide={true}
-                    pause="hover"
-                    controls={true}
-                    indicators={true}
-                    className="w-70 h-70"
-                >
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-30"
-                            src={GM} 
-                            alt="GM Argentina"
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-30"
-                            src={Ceva}
-                            alt="Ceva Logistics"
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-30"
-                            src={Nautico}
-                            alt="Nautico Sportivo Avellaneda"
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-30"
-                            src={Mayo}
-                            alt="Grupo Mayo"
-                        />
-                    </Carousel.Item>
-                </Carousel>
-            </Row>
-        </Container>
+        <Carousel>
+            <Carousel.Item>
+                <div className="d-flex justify-content-center">
+                    <img
+                        className="img-fluid w-30"
+                        src={GM}
+                        alt="First slide"
+                    />
+                </div>
+                <div className="d-flex justify-content-center">
+                    <h5>General Motors</h5>
+                    
+                </div>
+            </Carousel.Item>
+            <Carousel.Item>
+                <div className="d-flex justify-content-center">
+                    <img
+                        className="img-fluid w-30"
+                        src={Nautico}
+                        alt="Second slide"
+                    />
+                </div>
+                <div className="d-flex justify-content-center">
+                    <h5>Club Náutico Sportivo Avellaneda</h5>
+                    
+                </div>
+            </Carousel.Item>
+            <Carousel.Item>
+                <div className="d-flex justify-content-center">
+                    <img
+                        className="img-fluid w-30"
+                        src={Mayo}
+                        alt="Third slide"
+                    />
+                </div>
+                <div className="d-flex justify-content-center">
+                    <h5>Grupo Mayo</h5>
+                    
+                </div>
+            </Carousel.Item>
+            <Carousel.Item>
+                <div className="d-flex justify-content-center">
+                    <img
+                        className="img-fluid w-30"
+                        src={Ceva}
+                        alt="Third slide"
+                    />
+                </div>
+                <div className="d-flex justify-content-center">
+                    <h5>Ceva Logistics</h5>
+                    
+                </div>
+            </Carousel.Item>
+        </Carousel>
 
     );
 }

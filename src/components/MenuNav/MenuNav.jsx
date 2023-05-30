@@ -9,7 +9,7 @@ import { CotizacionDolar } from '../Context/CotizacionDolar';
 import { CartWidget } from '../CartWidget/CartWidget';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
-import { LoginScreen } from "../LoginScreen/LoginScreen";
+
 
 
 export function MenuNav() {
@@ -53,6 +53,11 @@ export function MenuNav() {
                             </NavDropdown>
 
                             <Nav.Link as='span'><Link to='/Contacto' style={{ color: 'black', textDecoration: 'none' }}>Contacto</Link></Nav.Link>
+                            <Nav.Link as='span'><Link to='/Alta' style={{ color: 'black', textDecoration: 'none' }}>Alta/Modif Clientes</Link></Nav.Link>
+                            {user.logged ?
+                                <Nav.Link as='span'><Link to='/Ordenes' style={{ color: 'black', textDecoration: 'none' }}>Ordenes Realizadas</Link></Nav.Link>
+                                : ""
+                            }
                         </Nav>
 
 

@@ -12,8 +12,9 @@ import RegisterScreen from '../LoginScreen/RegisterScreen';
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { MenuNav } from "../MenuNav/MenuNav";
-
-
+import { Checkout } from "../Checkout/Checkout";
+import { OrdenesRealizadas } from "../OrdenesRealizadas/OrdenesRealizadas";
+import { AltaModifClientes } from "../AltaModifClientes/AltaModifClientes";
 
 const AppRouter = () => {
     const { user } = useContext(AuthContext)
@@ -28,13 +29,16 @@ const AppRouter = () => {
                 <Route path='/tienda/:categoriaId' element={<ItemListContainer />} />
                 <Route path='/detail/:itemId' element={<ItemDetailContainer />} />
                 <Route path='/contacto' element={<Contacto />} />
-
+                <Route path='/alta' element={<AltaModifClientes />} />
 
                 {
                     user.logged
                         ? <>
+                            <Route path='/ordenes' element={<OrdenesRealizadas />} />
                             <Route path='/cart' element={<Cart />} />
                             <Route path='/carrito' element={<CartWidget />} />
+                            <Route path='/checkout' element={<Checkout />} />
+                            
                         </>
                         :
                         <>
@@ -45,6 +49,7 @@ const AppRouter = () => {
                 }
                 <Route path='*' element={<Navigate to={"/"} />} />
             </Routes>
+            
         </BrowserRouter>
     )
 }

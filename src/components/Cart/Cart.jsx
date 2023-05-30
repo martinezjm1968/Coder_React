@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import { FaTrashAlt } from 'react-icons/fa';
 import { CotizacionDolar } from '../Context/CotizacionDolar';
+import { Link } from "react-router-dom";
 import './Cart.css';
 
 let precioPesos = 0;
@@ -10,7 +11,12 @@ export const Cart = () => {
     const { cart, emptyCart, totalCompra, removeItem } = useContext(CartContext)
     const { dolar, setDolar } = useContext(CotizacionDolar)
 
-
+    const decimales = {
+        maximumFractionDigits: 0 // Establece el número máximo de dígitos decimales a 0
+    };
+    const total = totalCompra()
+    const subtotal = Number(total) / 1.21
+    const IVA = Number(total) - subtotal
 
     return (
         <div className="contenedor_cart">
@@ -19,15 +25,15 @@ export const Cart = () => {
                     <div className="row">
                         <div>
 
-
                             <h2>Tu compra</h2>
                             <hr />
                             <div className="card-body text-black">
                                 {
                                     cart.map((item) => (
                                         <div key={item.id}>
-                                            <h4>{item.titulo}</h4>
-                                            <img style={{ width: '80px', height: '80px' }} src={item.imagen} alt={item.titulo}/>
+                                            <h4>{item.title}</h4>
+                                            <img style={{ width: '80px', height: '80px' }} src={item.imageSource} alt={item.title} />
+                                            
                                             <p>Cantidad: {item.cantidad} unidades</p>
                                             <p>Subotal: ${(item.cantidad * dolar.oficial.value_sell * item.precio).toLocaleString()}</p>
                                             <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>
@@ -47,11 +53,14 @@ export const Cart = () => {
                     <br />
                     <div>
                         <br />
-                        <h4>TOTAL: ${totalCompra().toLocaleString()}</h4>
+                        <h5>SubTotal: ${subtotal.toLocaleString('es-AR', decimales)}</h5>
+                        <h5>IVA: ${IVA.toLocaleString('es-AR', decimales)}</h5>
+                        <hr />
+                        <h4>TOTAL: ${totalCompra().toLocaleString('es-AR', decimales)}</h4>
                         <hr />
 
 
-                        <button onClick={emptyCart} className="btn btn-success">Finalizar Compra</button>
+                        <Link to="/checkout" className="btn btn-success">Finalizar mi compra</Link>
                     </div>
                 </div>
             </div>

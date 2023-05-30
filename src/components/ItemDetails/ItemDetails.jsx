@@ -3,6 +3,7 @@ import { Contador } from '../Contador/Contador';
 import { CartContext } from '../Context/CartContext';
 import { Link } from 'react-router-dom';
 import { CotizacionDolar } from '../Context/CotizacionDolar';
+import "../ItemListContainer/Items.css";
 
 let precioPesos = 0;
 
@@ -20,45 +21,48 @@ export const ItemDetails = ({ item }) => {
     }
 
     precioPesos = dolar?.oficial.value_sell * item.precio;
-    console.log("Item Imagen: " +item.imagen);
+
 
     return (
-        <div className="col-md-5">
-            <div className="card text-center bg-light animate__animated animate__fadeInUp">
-                <div className="overflow">
-                    <img src={item.imagen} className="card-img-top" alt={item.titulo} />
+        <div className="contenedor_itemDitail">
+            <div className="grid-list>">
+                <div className="row_list">
+                    <div className="card text-center bg-light animate__animated animate__fadeInUp">
+                        <div className="overflow">
+                            <img src={item.imageSource} className="card-img-top" alt={item.title} />
+                        </div>
+                        <div className="card-body text-light">
+                            <h4 style={{ color: 'black' }} className="card-title">{item.title}</h4>
+                            <p className="card-text text-dark">
+                                {item.cuerpo}
+                            </p>
+
+                            <p style={{ color: 'black' }}> Stock actual: {item.stock}  </p>
+
+                            <p style={{ fontSize: '16px', color: 'black' }}> Precio Unitario: u${item.precio}  </p>
+
+                            {dolar &&
+                                <>
+                                    <p style={{ fontSize: '16px', color: 'black' }}>  Precio Unitario: ${(precioPesos).toLocaleString()}  </p>
+                                    <p style={{ fontSize: '16px', color: 'black' }}> <strong> Subtotal: ${(precioPesos * cantidad).toLocaleString()} </strong> </p>
+                                </>
+                            }
+                            <br />
+                            {
+                                isInCart(item.id)
+                                    ? <Link className="btn btn-success" to="/cart">Terminar mi compra</Link>
+                                    : <Contador
+                                        cantidad={cantidad}
+                                        setCantidad={setCantidad}
+                                        stock={item.stock}
+                                        agregar={handleAgregar}
+                                    />
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div className="card-body text-light">
-                    <h4 style={{ color: 'black' }} className="card-title">{item.titulo}</h4>
-                    <p className="card-text text-dark">
-                        {item.cuerpo}
-                    </p>
-
-                    <p style={{ color: 'black' }}> Stock actual: {item.stock}  </p>
-
-                    <p style={{ fontSize: '16px', color: 'black' }}> Precio Unitario: u${item.precio}  </p>
-
-                    {dolar &&
-                        <>
-                            <p style={{ fontSize: '16px', color: 'black' }}>  Precio Unitario: ${(precioPesos).toLocaleString()}  </p>
-                            <p style={{ fontSize: '16px', color: 'black' }}> <strong> Subtotal: ${(precioPesos * cantidad).toLocaleString()} </strong> </p>
-                        </>
-                    }
-                    <br />
-                    {
-                        isInCart(item.id)
-                            ? <Link className="btn btn-success" to="/cart">Terminar mi compra</Link>
-                            : <Contador
-                                cantidad={cantidad}
-                                setCantidad={setCantidad}
-                                stock={item.stock}
-                                agregar={handleAgregar}
-                            />
-                    }
-                </div>
-                
             </div>
-        </div>
+        </div >
     )
 }
 

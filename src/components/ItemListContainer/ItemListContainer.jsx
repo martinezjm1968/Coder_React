@@ -4,14 +4,15 @@ import { ItemList } from '../ItemList/ItemList';
 import { useParams } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../Firebase/Config'
-//import "../ItemCard/ItemCard.css";
+import Loader from '../Loader/Loader'
+import "./Items.css";
 
 export const ItemListContainer = () => {
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(true)
 
     const { categoriaId } = useParams()
-    console.log(categoriaId)
+    
 
     useEffect(() => {
         setLoading(true)
@@ -32,17 +33,18 @@ export const ItemListContainer = () => {
                 })
                 setProductos(docs)
             })
-            .catch(e => console.log(e))
+            .catch(e => alert(e))
             .finally(() => setLoading(false))
     }, [categoriaId])
 
     return (
-        <div className="container my-5">
-            {
-                loading
-                    ? <h2>Cargando...</h2>
-                    : <ItemList items={productos} />
-            }
+        <div className="contenedor_itemlist">
+            
+                {loading 
+                    ? <Loader />
+                    : <ItemList items={productos}/>
+                }
+            
         </div>
     )
 }
