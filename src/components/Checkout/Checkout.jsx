@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react"
 import { CartContext } from "../Context/CartContext"
 import { Navigate } from 'react-router-dom'
-import { collection, getDoc, addDoc, writeBatch, doc } from "firebase/firestore"
+import { collection, getDoc, addDoc, writeBatch, doc, getDocs, query, where } from "firebase/firestore"
 import { db } from "../Firebase/Config.js"
 import { Link } from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -39,6 +39,10 @@ export const Checkout = () => {
     const [orderId, setOrderId] = useState(null)
     const { dolar } = useContext(CotizacionDolar)
 
+    
+    const userEmail = user.email;
+
+
     const [fechaCompra, setCurrentDate] = useState(new Date());
     useEffect(() => {
         setCurrentDate(new Date());
@@ -51,6 +55,36 @@ export const Checkout = () => {
     const subtotal = Number(total) / 1.21
     const IVA = Number(total) - subtotal
 
+
+    ///////////////////////////////////////////////////////
+    const [clienteReg, setCliente] = useState('');
+    useEffect(() => {
+        const fetchCliente = async () => {
+            try {
+                // 1.- Armar una referencia (sync)
+                const clienteRef = collection(db, "Clientes")
+                const q = userEmail
+                    ? query(clienteRef, where("email", "==", userEmail))
+                    : clienteRef
+                // 2.- Consumir esa referencia (async)
+                
+                const snapshot = await getDocs(q);
+                const clienteDef = snapshot.docs[0].data();
+                const clienteId = snapshot.docs[0].id;
+                console.log("Cliente: " + clienteDef);
+                setCliente(clienteDef)
+
+            } catch (error) {
+                console.log('Error al obtener el cliente:', error);
+            }
+        };
+
+        fetchCliente();
+    }, []);
+    
+    ////////////////////////////////////////////////////////
+
+
     const generarOrden = async (values) => {
         const orden = {
             client: values,
@@ -58,8 +92,7 @@ export const Checkout = () => {
             total: totalCompra(),
             fyh: new Date()
         }
-
-
+        
         const batch = writeBatch(db)
         const productosRef = collection(db, "items")
         const ordersRef = collection(db, "orders")
@@ -120,6 +153,7 @@ export const Checkout = () => {
         return <Navigate to="/" />
     }
 
+    console.log("Cliente Registrado: " + clienteReg.name);
 
     return (
 
@@ -164,14 +198,14 @@ export const Checkout = () => {
                         <hr />
 
                     </div>
-
-
+{console.log("Dentro del return, clienteReg: " +clienteReg.name)}
                     <Formik
+                        enableReinitialize
                         initialValues={{
-                            nombre: '',
-                            direccion: '',
-                            tel: '',
-                            cuit: '',
+                            nombre: clienteReg.name,
+                            direccion: clienteReg.dir,
+                            tel: clienteReg.tel,
+                            cuit: clienteReg.cuit,
                             fecha: fechaCompra,
                             email: user.email
                         }}
@@ -190,7 +224,7 @@ export const Checkout = () => {
                                 <Field name="cuit" type="text" placeholder="CUIT (sin guiones)" className="form-control my-2" />
                                 <ErrorMessage name="cuit" component={"p"} />
 
-                                <Field name="fecha" type="text" placeholder="Fecha" readonly className="form-control my-2" />
+                                <Field name="fecha" type="text" placeholder="Fecha" readOnly className="form-control my-2" />
                                 <ErrorMessage name="fecha" component={"p"} />
 
                                 <Field name="email" type="email" placeholder="Email" readOnly className="form-control my-2" />

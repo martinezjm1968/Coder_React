@@ -6,6 +6,7 @@ import { AuthContext } from "../Context/AuthContext"
 
 export const LoginScreen = () => {
     const { login, loginWithGoogle } = useContext(AuthContext)
+    
 
     const [values, setValues] = useState({
         email: '',
@@ -21,7 +22,7 @@ export const LoginScreen = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        
         login(values)
     }
 

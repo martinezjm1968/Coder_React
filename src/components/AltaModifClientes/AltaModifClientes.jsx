@@ -10,7 +10,6 @@ export const AltaModifClientes = () => {
     const { user } = useContext(AuthContext)
     const userEmail = user.email;
 
-
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     const [name, setName] = useState('');
@@ -25,46 +24,55 @@ export const AltaModifClientes = () => {
     const [pais, setPais] = useState('');
     const [cpostal, setCpostal] = useState('');
 
-    useEffect(() => {
-
-        const fetchCliente = async () => {
-            try {
-                // 1.- Armar una referencia (sync)
-                const clienteRef = collection(db, "Clientes")
-                const q = userEmail
-                    ? query(clienteRef, where("email", "==", userEmail))
-                    : clienteRef
-                // 2.- Consumir esa referencia (async)
-                const clienteDoc = await getDocs(q);
-
-
-
-                if (!clienteDoc.empty) {
-                    console.log("cliente existe");
-                    const cliente = clienteDoc.docs[0].data();
-                    console.log("Cliente: " + cliente.name);
-                    setName(cliente.name);
-                    setEmail(userEmail);
-                    setDir(cliente.dir);
-                    setTel(cliente.tel);
-                    setCuit(cliente.cuit);
-                    setIva(cliente.iva);
-                    setIibb(cliente.iibb);
-                    setCiudad(cliente.ciudad);
-                    setProvincia(cliente.provincia);
-                    setPais(cliente.pais);
-                    setCpostal(cliente.cpostal);
-                } else {
-                    console.log("cliente NO existe");
+    if (userEmail) {
+        useEffect(() => {
+            const fetchCliente = async () => {
+                try {
+                    // 1.- Armar una referencia (sync)
+                    const clienteRef = collection(db, "Clientes")
+                    const q = userEmail
+                        ? query(clienteRef, where("email", "==", userEmail))
+                        : clienteRef
+                    // 2.- Consumir esa referencia (async)
+                    const clienteDoc = await getDocs(q);
+                    if (!clienteDoc.empty) {
+                        console.log("cliente existe");
+                        const cliente = clienteDoc.docs[0].data();
+                        console.log("Cliente: " + cliente.name);
+                        setName(cliente.name);
+                        setEmail(userEmail);
+                        setDir(cliente.dir);
+                        setTel(cliente.tel);
+                        setCuit(cliente.cuit);
+                        setIva(cliente.iva);
+                        setIibb(cliente.iibb);
+                        setCiudad(cliente.ciudad);
+                        setProvincia(cliente.provincia);
+                        setPais(cliente.pais);
+                        setCpostal(cliente.cpostal);
+                    } else {
+                        console.log("cliente NO existe");
+                        setName('');
+                        setEmail(userEmail);
+                        setDir('');
+                        setTel('');
+                        setCuit('');
+                        setIva('');
+                        setIibb('');
+                        setCiudad('');
+                        setProvincia('');
+                        setPais('');
+                        setCpostal('');
+                    }
+                } catch (error) {
+                    console.log('Error al obtener el cliente:', error);
                 }
-            } catch (error) {
-                console.log('Error al obtener el cliente:', error);
-            }
-        };
+            };
 
-        fetchCliente();
-    }, []);
+            fetchCliente();
+        }, []);
 
+    }
     ////////////////////////////////////////////////////////////////////////
 
     const validarCliente = async () => {
