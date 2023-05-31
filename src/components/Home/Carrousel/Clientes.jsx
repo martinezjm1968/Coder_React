@@ -7,7 +7,7 @@ import Nautico from '../../../assets/Logos/Nautico.png'
 export function Clientes() {
     return (
         <Carousel>
-            <Carousel.Item>
+            <Carousel.Item interval={1500}>
                 <div className="d-flex justify-content-center">
                     <img
                         className="img-fluid w-30"
@@ -20,7 +20,7 @@ export function Clientes() {
                     
                 </div>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={1500}>
                 <div className="d-flex justify-content-center">
                     <img
                         className="img-fluid w-30"
@@ -33,7 +33,7 @@ export function Clientes() {
                     
                 </div>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={1500}>
                 <div className="d-flex justify-content-center">
                     <img
                         className="img-fluid w-30"
@@ -46,7 +46,7 @@ export function Clientes() {
                     
                 </div>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item interval={1500}>
                 <div className="d-flex justify-content-center">
                     <img
                         className="img-fluid w-30"
