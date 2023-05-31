@@ -132,11 +132,28 @@ export const AltaModifClientes = () => {
 
             await updateDoc(clienteMail, clienteActualizado);
             //clientesRef.doc(clienteId).update(clienteActualizado);
-            console.log('Cliente actualizado:', clienteActualizado);
+            alert('Cliente actualizado:', clienteActualizado);
         }
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        // Realiza las validaciones aquí
+        if (name.length<5) {
+            alert('Por favor, ingresa tu nombre, debe ser mayor a 5 caracteres.');
+            return;
+        }
+        if (tel.length < 10) {
+            alert('El nro telefónico debe tener más de 10 dígitos.');
+            return;
+        }
+        if (dir.length<10) {
+            alert('Por favor, ingresa una dirección, debe ser mayor a 10 caracteres.');
+            return;
+        }
+        if (cuit.length!=11) {
+            alert('Por favor, ingresa tu CUIT/CUIL , debe ser de 11 caracteres, sin guiones!.');
+            return;
+        }
         validarCliente();
     };
 
