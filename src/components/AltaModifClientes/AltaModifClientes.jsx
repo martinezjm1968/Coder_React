@@ -5,9 +5,13 @@ import { collection, query, getDocs, addDoc, updateDoc, doc, where } from "fireb
 import { AuthContext } from '../Context/AuthContext';
 import "./AltaModifClientes.css"
 
+
 export const AltaModifClientes = () => {
     const { user } = useContext(AuthContext)
     const userEmail = user.email;
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState(userEmail);
@@ -21,6 +25,48 @@ export const AltaModifClientes = () => {
     const [pais, setPais] = useState('');
     const [cpostal, setCpostal] = useState('');
 
+    useEffect(() => {
+
+        const fetchCliente = async () => {
+            try {
+                // 1.- Armar una referencia (sync)
+                const clienteRef = collection(db, "Clientes")
+                const q = userEmail
+                    ? query(clienteRef, where("email", "==", userEmail))
+                    : clienteRef
+                // 2.- Consumir esa referencia (async)
+                const clienteDoc = await getDocs(q);
+
+
+
+                if (!clienteDoc.empty) {
+                    console.log("cliente existe");
+                    const cliente = clienteDoc.docs[0].data();
+                    console.log("Cliente: " + cliente.name);
+                    setName(cliente.name);
+                    setEmail(userEmail);
+                    setDir(cliente.dir);
+                    setTel(cliente.tel);
+                    setCuit(cliente.cuit);
+                    setIva(cliente.iva);
+                    setIibb(cliente.iibb);
+                    setCiudad(cliente.ciudad);
+                    setProvincia(cliente.provincia);
+                    setPais(cliente.pais);
+                    setCpostal(cliente.cpostal);
+                } else {
+                    console.log("cliente NO existe");
+                }
+            } catch (error) {
+                console.log('Error al obtener el cliente:', error);
+            }
+        };
+
+        fetchCliente();
+    }, []);
+
+    ////////////////////////////////////////////////////////////////////////
+
     const validarCliente = async () => {
 
         // 1.- Armar una referencia (sync)
@@ -31,13 +77,10 @@ export const AltaModifClientes = () => {
         // 2.- Consumir esa referencia (async)
         const snapshot = await getDocs(q);
 
-        console.log("Que tiene snapshot: " + snapshot.empty);
-
-
         // Me fijo si existe o no existe el cliente
         if (snapshot.empty) {
 
-            console.log("El cliente NO existe!");
+            console.log("El cliente NO existe! 2");
             // El cliente no existe, dar de alta un nuevo cliente
             const nuevoCliente = {
                 name: "",
@@ -59,7 +102,7 @@ export const AltaModifClientes = () => {
 
         } else {
 
-            console.log("El cliente existe!");
+            console.log("El cliente existe! 2");
             // El cliente existe, actualizar los valores
             const cliente = snapshot.docs[0].data();
             const clienteId = snapshot.docs[0].id;
