@@ -57,7 +57,7 @@ export const OrdenesRealizadas = () => {
                                 <div className="container my-2">
                                     <div >
                                         <div>
-                                            <div className="card-body text-black" style={{ fontSize: '14px', textAlign: 'center' }}>
+                                            <div className="card-body text-black" style={{ fontSize: '14px', textAlign: 'left' }}>
                                                 <p>Nombre: {order.client.nombre}</p>
                                                 <p>Direccion: {order.client.direccion}</p>
                                                 <p>CUIT: {order.client.cuit}</p>
