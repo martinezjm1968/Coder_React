@@ -37,20 +37,16 @@ export const OrdenesRealizadas = () => {
                         id: doc.id
                     }
                 })
-
-
                 setOrders(docs)
-
             })
             .catch(e => console.log(e))
             .finally(() => setLoading(false))
     }, [])
-
     return (
 
         <div className="contenedor_cart">
             <div>
-            <h4>Órdenes del usuario: {userEmail}</h4>
+                <h5>Órdenes del usuario: {userEmail}</h5>
                 {loading
                     ? <Loader />
                     : (
@@ -61,7 +57,7 @@ export const OrdenesRealizadas = () => {
                                         <div>
                                             <div className="row">
                                                 <div>
-                                                    <div className="card-body text-black">
+                                                    <div className="card-body text-black" style={{ fontSize: '12px' }}>
                                                         <p>Nombre: {order.client.nombre}</p>
                                                         <p>Direccion: {order.client.direccion}</p>
                                                         <p>CUIT: {order.client.cuit}</p>
@@ -75,7 +71,7 @@ export const OrdenesRealizadas = () => {
                                         <div>
                                             <div className="right-column">
                                                 <div className="row">
-                                                    <div className="card-body text-white bg-secondary">
+                                                    <div className="card-body text-white bg-secondary" style={{ fontSize: '12px' }}>
                                                         <ul >
                                                             {order.items.map((item) => (
                                                                 <li key={item.id} >
@@ -85,7 +81,7 @@ export const OrdenesRealizadas = () => {
                                                                     <p> Precio u$s Actual: ${(item.precio * dolar.oficial.value_sell).toLocaleString()}</p>
                                                                 </li>
                                                             ))}
-                                                            
+
                                                         </ul>
                                                     </div>
                                                 </div>
