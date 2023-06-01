@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore"
+import { collection, query, where, getDocs, orderBy} from "firebase/firestore"
 import "firebase/firestore";
 import { db } from "../Firebase/Config.js"
 import { AuthContext } from "../Context/AuthContext";
@@ -25,7 +25,7 @@ export const OrdenesRealizadas = () => {
         // 1.- Armar una referencia (sync)
         const ordenes = collection(db, "orders")
         const q = userEmail
-            ? query(ordenes, where("client.email", "==", userEmail))
+            ? query(ordenes, where("client.email", "==", userEmail),  orderBy("client.fecha"))
             : ordenes
         // 2.- Consumir esa referencia (async)
         
@@ -37,10 +37,12 @@ export const OrdenesRealizadas = () => {
                         id: doc.id
                     }
                 })
+
+                
                 setOrders(docs)
 
             })
-            .catch(e => alert(e))
+            .catch(e => console.log(e))
             .finally(() => setLoading(false))
     }, [])
 
