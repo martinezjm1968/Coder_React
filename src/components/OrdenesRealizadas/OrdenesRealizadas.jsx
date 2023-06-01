@@ -63,7 +63,6 @@ export const OrdenesRealizadas = () => {
                                                         <p>CUIT: {order.client.cuit}</p>
                                                         <p>Fecha de compra: {order.client.fecha.toDate().toLocaleDateString()}</p>
                                                         <p>Total: ${(order.total).toLocaleString()}</p>
-                                                        <hr />
                                                     </div>
                                                 </div>
                                             </div>
