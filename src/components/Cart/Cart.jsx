@@ -18,6 +18,34 @@ export const Cart = () => {
     const subtotal = Number(total) / 1.21
     const IVA = Number(total) - subtotal
 
+    /////////////////////////
+    const [cartData, setCartData] = useState([]);
+
+    // Recuperar datos del localStorage al cargar el componente
+    useEffect(() => {
+        const storedCartData = localStorage.getItem("cartData");
+        if (storedCartData) {
+            setCartData(JSON.parse(storedCartData));
+        }
+    }, []);
+
+    // Guardar datos del carrito en el localStorage cuando cambie
+    useEffect(() => {
+        localStorage.setItem("cartData", JSON.stringify(cart));
+    }, [cartData]);
+
+    // Toma los datos del localStorage
+    const handleRemoveItem = (itemId) => {
+        const updatedCart = cartData.filter((item) => item.id !== itemId);
+        setCartData(updatedCart);
+        removeItem(itemId);
+    };
+
+    const handleEmptyCart = () => {
+        setCartData([]);
+        emptyCart();
+    };
+/////////////////////////
     return (
         <div className="contenedor_cart">
             <div className="grid-container">
@@ -33,7 +61,7 @@ export const Cart = () => {
                                         <div key={item.id}>
                                             <h4>{item.title}</h4>
                                             <img style={{ width: '80px', height: '80px' }} src={item.imageSource} alt={item.title} />
-                                            
+
                                             <p>Cantidad: {item.cantidad} unidades</p>
                                             <p>Subotal: ${(item.cantidad * dolar.oficial.value_sell * item.precio).toLocaleString()}</p>
                                             <button onClick={() => removeItem(item.id)} className="btn btn-danger"><FaTrashAlt /></button>

@@ -1,0 +1,19 @@
+.contenedor_glob{
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: rgb(247, 247, 247);
+
+}
+
+
+.contenedor_cart {
+    max-width: 45%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: rgb(204, 202, 202);
+    text-align: center;
+}
+.contenedor_ord {
+    text-align: left;
+}

@@ -6,7 +6,8 @@ import { db } from "../Firebase/Config.js"
 import { AuthContext } from "../Context/AuthContext";
 import Loader from '../Loader/Loader'
 import { CotizacionDolar } from '../Context/CotizacionDolar';
-import "../Cart/Cart.css"
+import "./OrdenesRealizadas.css"
+import { alignPropType } from "react-bootstrap/esm/types.js";
 
 export const OrdenesRealizadas = () => {
     const [orders, setOrders] = useState([]);
@@ -44,46 +45,41 @@ export const OrdenesRealizadas = () => {
     }, [])
     return (
 
-        <div className="contenedor_cart">
-            <div>
-                <h5>Órdenes del usuario: {userEmail}</h5>
+        <div className="contenedor_glob" >
+            <div className="contenedor_cart">
+                <h5>&nbsp; &nbsp; Órdenes del usuario: {userEmail}</h5>
+                <hr />
                 {loading
                     ? <Loader />
                     : (
                         <ul>
                             {orders.map((order) => (
-                                <div className="grid-container">
-                                    <div className="left-column">
+                                <div className="container my-2">
+                                    <div >
                                         <div>
-                                            <div className="row">
-                                                <div>
-                                                    <div className="card-body text-black" style={{ fontSize: '12px' }}>
-                                                        <p>Nombre: {order.client.nombre}</p>
-                                                        <p>Direccion: {order.client.direccion}</p>
-                                                        <p>CUIT: {order.client.cuit}</p>
-                                                        <p>Fecha de compra: {order.client.fecha.toDate().toLocaleDateString()}</p>
-                                                        <p>Total: ${(order.total).toLocaleString()}</p>
-                                                    </div>
-                                                </div>
+                                            <div className="card-body text-black" style={{ fontSize: '14px', textAlign: 'center' }}>
+                                                <p>Nombre: {order.client.nombre}</p>
+                                                <p>Direccion: {order.client.direccion}</p>
+                                                <p>CUIT: {order.client.cuit}</p>
+                                                <p>Fecha de compra: {order.client.fecha.toDate().toLocaleDateString()}</p>
+                                                <p>Total: ${(order.total).toLocaleString()}</p>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div className="right-column">
-                                                <div className="row">
-                                                    <div className="card-body text-white bg-secondary" style={{ fontSize: '12px' }}>
-                                                        <ul >
-                                                            {order.items.map((item) => (
-                                                                <li key={item.id} >
-                                                                    <p> Producto: {item.nombre} </p>
-                                                                    <p> Cantidad: {item.cantidad} </p>
-                                                                    <p> Precio: u${item.precio}</p>
-                                                                    <p> Precio u$s Actual: ${(item.precio * dolar.oficial.value_sell).toLocaleString()}</p>
-                                                                </li>
-                                                            ))}
-
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                        
+                                    </div>
+                                    <div>
+                                        <div className="card-body text-white bg-secondary" style={{ fontSize: '12px' }}>
+                                            <div className="contenedor_ord">
+                                                <ul>
+                                                    {order.items.map((item) => (
+                                                        <li key={item.id} >
+                                                            <p> Producto: {item.nombre} </p>
+                                                            <p> Cantidad: {item.cantidad} </p>
+                                                            <p> Precio: u${item.precio}</p>
+                                                            <p> Precio u$s Actual: ${(item.precio * dolar.oficial.value_sell).toLocaleString()}</p>
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

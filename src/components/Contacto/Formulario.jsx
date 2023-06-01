@@ -15,7 +15,7 @@ export function Formulario() {
         cuit: '',
         fecha: fechaConsulta
     })
-    
+
 
     const handleInputChange = (e) => {
         setValues({
@@ -51,75 +51,77 @@ export function Formulario() {
     }
 
     return (
-        <div className="container my-2">
-            <h2>Contacto</h2>
-            <hr />
+        <div className="formulario">
+            <div className="container my-2">
+                <h2>Contacto</h2>
+                <hr />
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    name="name"
-                    value={values.name}
-                    onChange={handleInputChange}
-                    className="form-control my-2"
-                    type="text"
-                    placeholder="Tu nombre"
-                    required
-                />
+                <form onSubmit={handleSubmit}>
+                    <input
+                        name="name"
+                        value={values.name}
+                        onChange={handleInputChange}
+                        className="form-control my-2"
+                        type="text"
+                        placeholder="Tu nombre"
+                        required
+                    />
 
-                <input
-                    name="email"
-                    onChange={handleInputChange}
-                    value={values.email}
-                    className="form-control my-2"
-                    type="email"
-                    placeholder="email"
-                    required
-                />
+                    <input
+                        name="email"
+                        onChange={handleInputChange}
+                        value={values.email}
+                        className="form-control my-2"
+                        type="email"
+                        placeholder="email"
+                        required
+                    />
 
-                <input
-                    name="tel"
-                    onChange={handleInputChange}
-                    value={values.tel}
-                    className="form-control my-2"
-                    type="text"
-                    placeholder="Teléfono"
-                    required
-                />
+                    <input
+                        name="tel"
+                        onChange={handleInputChange}
+                        value={values.tel}
+                        className="form-control my-2"
+                        type="text"
+                        placeholder="Teléfono"
+                        required
+                    />
 
-                <input
-                    name="dir"
-                    onChange={handleInputChange}
-                    value={values.dir}
-                    className="form-control my-2"
-                    type="text"
-                    placeholder="Dirección"
-                    required
-                />
+                    <input
+                        name="dir"
+                        onChange={handleInputChange}
+                        value={values.dir}
+                        className="form-control my-2"
+                        type="text"
+                        placeholder="Dirección"
+                        required
+                    />
 
-                <input
-                    name="cuit"
-                    onChange={handleInputChange}
-                    value={values.cuit}
-                    className="form-control my-2"
-                    type="text"
-                    placeholder="CUIT"
-                    required
-                />
+                    <input
+                        name="cuit"
+                        onChange={handleInputChange}
+                        value={values.cuit}
+                        className="form-control my-2"
+                        type="text"
+                        placeholder="CUIT"
+                        required
+                    />
 
-                <input
-                    name="message"
-                    onChange={handleInputChange}
-                    value={values.message}
-                    className="form-control my-2"
-                    type="text"
-                    placeholder="Mensaje"
-                    required
-                />
+                    <input
+                        name="message"
+                        onChange={handleInputChange}
+                        value={values.message}
+                        className="form-control my-2"
+                        type="text"
+                        placeholder="Mensaje"
+                        required
+                    />
 
-                <br />
+                    <br />
 
-                <button className="btn btn-primary" type="submit">Enviar</button>
-            </form>
+                    <button className="btn btn-primary" type="submit">Enviar</button>
+                </form>
+            </div>
         </div>
     )
 }
