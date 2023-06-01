@@ -49,21 +49,17 @@ export const OrdenesRealizadas = () => {
     return (
 
         <div className="contenedor_cart">
-
-            <h4>Órdenes del usuario: {userEmail}</h4>
             <div>
-
-
                 {loading
                     ? <Loader />
                     : (
                         <ul>
                             {orders.map((order) => (
                                 <div className="grid-container">
+                                
                                     <div className="left-column">
+                                    <h4>Órdenes del usuario: {userEmail}</h4>
                                         <div>
-
-
                                             <div className="row">
                                                 <div>
                                                     <div className="card-body text-black">
@@ -78,7 +74,6 @@ export const OrdenesRealizadas = () => {
                                             </div>
                                         </div>
                                         <div>
-
                                             <div className="right-column">
                                                 <div className="row">
                                                     <div className="card-body text-white bg-secondary">
@@ -97,7 +92,6 @@ export const OrdenesRealizadas = () => {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             ))}
