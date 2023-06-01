@@ -50,15 +50,14 @@ export const OrdenesRealizadas = () => {
 
         <div className="contenedor_cart">
             <div>
+            <h4>Órdenes del usuario: {userEmail}</h4>
                 {loading
                     ? <Loader />
                     : (
                         <ul>
                             {orders.map((order) => (
                                 <div className="grid-container">
-                                
                                     <div className="left-column">
-                                    <h4>Órdenes del usuario: {userEmail}</h4>
                                         <div>
                                             <div className="row">
                                                 <div>
