@@ -1,3 +1,30 @@
+.contenedor_cart{
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 0;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 65% 35%;
+}
+
+.left-column {
+    display: grid;
+    grid-template-rows: repeat(n, 1fr);
+}
+
+.row {
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
+.right-column {
+    background-color: #ccc;
+    padding: 10px;
+    align-items: center
+}
+
+
 /* === removing default button style ===*/
 .button {
     margin: 0;
