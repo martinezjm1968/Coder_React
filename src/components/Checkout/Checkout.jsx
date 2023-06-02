@@ -9,6 +9,7 @@ import * as Yup from 'yup'
 import { AuthContext } from "../Context/AuthContext";
 import { FaTrashAlt } from 'react-icons/fa';
 import { CotizacionDolar } from '../Context/CotizacionDolar';
+import "./Checkout.css"
 
 const schema = Yup.object().shape({
     nombre: Yup.string()
@@ -39,7 +40,7 @@ export const Checkout = () => {
     const [orderId, setOrderId] = useState(null)
     const { dolar } = useContext(CotizacionDolar)
 
-    
+
     const userEmail = user.email;
 
 
@@ -67,7 +68,7 @@ export const Checkout = () => {
                     ? query(clienteRef, where("email", "==", userEmail))
                     : clienteRef
                 // 2.- Consumir esa referencia (async)
-                
+
                 const snapshot = await getDocs(q);
                 const clienteDef = snapshot.docs[0].data();
                 const clienteId = snapshot.docs[0].id;
@@ -81,7 +82,7 @@ export const Checkout = () => {
 
         fetchCliente();
     }, []);
-    
+
     ////////////////////////////////////////////////////////
 
 
@@ -92,7 +93,7 @@ export const Checkout = () => {
             total: totalCompra(),
             fyh: new Date()
         }
-        
+
         const batch = writeBatch(db)
         const productosRef = collection(db, "items")
         const ordersRef = collection(db, "orders")
@@ -198,7 +199,7 @@ export const Checkout = () => {
                         <hr />
 
                     </div>
-{console.log("Dentro del return, clienteReg: " +clienteReg.name)}
+                    {console.log("Dentro del return, clienteReg: " + clienteReg.name)}
                     <Formik
                         enableReinitialize
                         initialValues={{
@@ -230,7 +231,11 @@ export const Checkout = () => {
                                 <Field name="email" type="email" placeholder="Email" readOnly className="form-control my-2" />
                                 <ErrorMessage name="email" component={"p"} />
 
-                                <button className="btn btn-primary" type="submit">Enviar</button>
+                                {/*<button className="btn btn-primary" type="submit">Enviar</button>*/}
+                                <button data-text="Enviar" class="button">
+                                    <span class="actual-text">&nbsp;Enviar&nbsp;</span>
+                                    <span class="hover-text" aria-hidden="true">&nbsp;Enviar&nbsp;</span>
+                                </button>
                             </Form>
                         )}
                     </Formik>

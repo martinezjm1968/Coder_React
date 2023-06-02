@@ -45,7 +45,7 @@ export const Cart = () => {
         setCartData([]);
         emptyCart();
     };
-/////////////////////////
+    /////////////////////////
     return (
         <div className="contenedor_cart">
             <div className="grid-container">
@@ -89,6 +89,7 @@ export const Cart = () => {
 
 
                         <Link to="/checkout" className="btn btn-success">Finalizar mi compra</Link>
+                        
                     </div>
                 </div>
             </div>
